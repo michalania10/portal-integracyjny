@@ -1,6 +1,6 @@
 import React from 'react';
 import Table from "./Table";
-import {FetchInfo, fetchStateError, fetchStateNotReady, fetchStateReady, hasFetch} from "./FetchInfo";
+import {FetchInfo, Fetch, fetchStateNotReady, hasFetch} from "./FetchInfo";
 
 const korbaAddress = "https://korba.edu.pl/"
 
@@ -34,40 +34,44 @@ function quotesQuery(formsPart, tag) {
 class Korba extends React.Component {
     constructor(props) {
         super(props);
+        const formsQueryPart = queryPart(props.fetchType, props.value);
+        const formsQuery = "[" + queryPart(props.fetchType, props.value) + "]";
+
         this.state = {
             formsFetch: fetchStateNotReady(),
             quotesFetch: fetchStateNotReady(),
-            formsQueryPart: queryPart(props.fetchType, props.value),
-            formsQuery: "[" + queryPart(props.fetchType, props.value) + "]",
+            formsQueryPart,
+            formsQuery,
+            formsFetchUrl: korbaGetFormsAddress(formsQuery),
+            quotesFetchUrl: korbaGetQuotesAddress(formsQuery)
         }
+
+        this.formsReady = this.formsReady.bind(this);
+        this.quotesReady = this.quotesReady.bind(this);
     }
 
-    componentDidMount() {
-        fetch(korbaGetFormsAddress(this.state.formsQuery))
-            .then(res => res.json())
-            .then(response => this.setState((prevState) => {
-                    const newState = { ...prevState }
-                    newState.formsFetch = fetchStateReady(response.forms);
-                    return newState;
-                  }),
-                  error => this.setState((prevState) => {const newState = { ...prevState }
-                    newState.formsFetch = fetchStateError(error);
-                    return newState;
-            }));
-        fetch(korbaGetQuotesAddress(this.state.formsQuery))
-            .then(res => res.json())
-            .then(response => this.setState((prevState) => {
-                    const newState = { ...prevState }
-                    newState.quotesFetch = fetchStateReady(response.quotes);
-                    return newState;
-                }),
-                error => this.setState((prevState) => {const newState = { ...prevState }
-                    newState.quotesFetch = fetchStateError(error);
-                    return newState;
-                }));
+    formsReady(fetchInfo) {
+        this.setState((prevState) => {
+            const newState = { ...prevState }
+            newState.formsFetch = { ...fetchInfo };
+            if (!fetchInfo.error && !fetchInfo.isLoading)
+                newState.formsFetch.results = fetchInfo.results.forms;
+            return newState;
+        })
+    }
+
+    quotesReady(fetchInfo) {
+        this.setState((prevState) => {
+            const newState = { ...prevState }
+            newState.quotesFetch = { ...fetchInfo };
+            if (!fetchInfo.error && !fetchInfo.isLoading)
+                newState.quotesFetch.results = fetchInfo.results.quotes;
+            return newState;
+        })
     }
 
     render() {
+        console.log("rendering")
         const hasForms = hasFetch(this.state.formsFetch)
         const stateAndProps = { ...this.state, ...this.props }
         const formsElem = hasForms ? <KorbaForms {...stateAndProps} /> :
@@ -78,8 +82,11 @@ class Korba extends React.Component {
             (hasQuotes ? <KorbaQuotes {...stateAndProps} /> :
                 <FetchInfo {...this.state.quotesFetch} translation={this.props.translation}/>);
 
-        return (<div>
-                <div>{this.props.translation["korba.korba"]}</div>
+        return (
+            <div>
+                <Fetch url={this.state.formsFetchUrl} onResponse={this.formsReady} onError={this.formsReady} />
+                <Fetch url={this.state.quotesFetchUrl} onResponse={this.quotesReady} onError={this.quotesReady} />
+                <div>{this.props.translation.get("korba.korba")}</div>
                 {formsElem}
                 {quotesElem}
             </div>
@@ -96,16 +103,16 @@ function KorbaForms(props) {
         return {
             ...form,
             key: form.tag,
-            link: (<a href={korbaLink(quotesQuery(props.formsQueryPart, form.tag))}>
-                {props.translation["korba.link"]}
+            link: (<a href={korbaLink(quotesQuery(props.formsQueryPart, form.tag))} target="blank">
+                {props.translation.get("korba.link")}
             </a>)
         };
     });
 
     return (<div>
-            {props.translation["korba.allResults"]}: {sumResults}
-            <a href={korbaLink(props.formsQuery)}>
-                {props.translation["korba.link"]}
+            {props.translation.get("korba.allResults")}: {sumResults}
+            <a href={korbaLink(props.formsQuery)} target="blank">
+                {props.translation.get("korba.link")}
             </a>
             <Table headers={["orth", "tag", "frequency", "link"]}
                    data={formsWithLinks}
@@ -145,10 +152,10 @@ function createRightContext(rightCtx, limit) {
 function KorbaHit(props) {
     const hit = props.hit
 
-    return (<span>
+    return (<>
         <strong>{getOrth(hit)}</strong>
         <u>{getTag(hit)}</u>
-    </span>);
+    </>);
 }
 
 function KorbaQuotes(props) {

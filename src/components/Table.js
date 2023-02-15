@@ -6,7 +6,7 @@ function Table(props) {
             <tr>
                 {props.headers.map(header =>
                     <th key={header}>
-                        {props.translation[header]}
+                        {props.translation.get(header)}
                     </th>
                 )}
             </tr>
