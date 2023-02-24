@@ -1,65 +1,57 @@
 import React from 'react';
 
-function hasFetch(props) {
-    return !props.isLoading && !props.error && (props.results == null || props.results.length);
-}
-
-function fetchStateNotReady() {
-    return { isLoading: true, error: null, results: null }
-}
-
-function fetchStateError(error) {
-    return { isLoading: false, error: error, results: null }
-}
-
-function fetchStateReady(results) {
-    return { isLoading: false, error: null, results: results }
-}
-class Fetch extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = { url: null }
+class FetchState {
+    constructor(ready, error, result) {
+        this.ready = ready;
+        this.error = error;
+        this.result = result;
     }
 
-    componentDidMount() { this.performApiCall(); }
+    static empty() { return new FetchState(false, null, null); }
+    static error(err) { return new FetchState(true, err, null); }
+    static ok(res) { return new FetchState(true, null, res); }
+}
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.url !== this.state.url)
-            this.performApiCall();
-    }
-
-    performApiCall() {
-        console.log("Perform api call" + this.props.url)
-        fetch(this.props.url)
-            .then(res => res.json())
-            .then(response => {
-                    // console.log("Fetching response", this.props.url, response)
-                    this.setState({url: this.props.url})
-                    this.props.onResponse(fetchStateReady(response));
-                  },
-                  error => {
-                    console.log("Fetching error", this.props.url, error)
-                    this.props.onError(fetchStateError(error))
-                  });
-    }
-
-    render() {
-        console.log("Rendering fetch" + this.props.url)
-        return <></>;
-    }
+function fetchAndParse(url) {
+    return window.fetch(url)
+        .then(res => res.json())
+        .then(response => {
+                console.log("Fetching response", url, response);
+                return FetchState.ok(response);
+            },
+            error => {
+                console.log("Fetching error", url, error);
+                return FetchState.error(error);
+            });
 }
 
 function FetchInfo(props) {
-    if (props.isLoading) return (
+    if (!props.ready) return (
         <div>{props.translation.get("loading")}</div>
     );
     if (props.error) return (
         <div><strong>{props.error.message}</strong></div>
     );
-    if (props.results != null && !props.results.length) return (
-        <div>{props.translation.get("noResults")}</div>
-    );
-    return null;
+    return <></>;
 }
 
-export { FetchInfo, Fetch, hasFetch, fetchStateNotReady, fetchStateError, fetchStateReady }
+function updatedState(oldState, fields, oldToNewMapping) {
+    const newState = { ...oldState }
+
+    let toAssign = newState;
+    let fieldName = fields[0];
+    let oldValue = toAssign[fieldName];
+
+    for (let fieldsIdx = 1; fieldsIdx < fields.length; fieldsIdx++) {
+        toAssign[fieldName] = { ...oldValue };
+        toAssign = toAssign[fieldName];
+
+        fieldName = fields[fieldsIdx];
+        oldValue = toAssign[fieldName];
+    }
+
+    toAssign[fieldName] = oldToNewMapping(oldValue)
+    return newState;
+}
+
+export { FetchInfo, FetchState, fetchAndParse, updatedState }

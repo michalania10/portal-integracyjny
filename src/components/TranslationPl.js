@@ -5,7 +5,6 @@ const TranslationPl = {
   "inputs.sources": "Żródła do przeszukania",
   "inputs.submit": "Szukaj",
   "korba": "Korpus barokowy",
-  "korba.korba": "Korpus barokowy",
   "korba.allResults": "Wystąpienia",
   "korba.leftCtx": "Lewy kontekst",
   "korba.hit": "Rezultat",
