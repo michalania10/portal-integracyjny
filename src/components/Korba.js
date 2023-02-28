@@ -105,7 +105,7 @@ function korbaWordToObject(korbaWord) {
 }
 
 function getHit(quote) {
-    return quote.hit[quote.endPosition];
+    return korbaWordToObject(quote.hit[quote.endPosition]);
 }
 
 function createLeftContext(leftCtx, limit) {
@@ -165,7 +165,7 @@ function selectQuotes(quotes, limit) {
                 otherQuotes[otherQuotes.length] = quote;
             } else {
                 quotedDocuments[quote.documentKey] = true;
-                resultQuotes[quotes.length] = quote
+                resultQuotes[resultQuotes.length] = quote
             }
         }
         quotesToCheck = otherQuotes;
