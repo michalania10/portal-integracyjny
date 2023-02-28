@@ -42,6 +42,10 @@ class App extends React.Component {
 
     updateInputState(inputState) {
         this.setState(oldState => updatedState(oldState, ["inputState"], () => inputState))
+        for (const [key, source] of Object.entries(this.state.allSources)) {
+            if (inputState.sources[key])
+                source.fetch[inputState.fetchType](inputState)
+        }
     }
 
     render() {

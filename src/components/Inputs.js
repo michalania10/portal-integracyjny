@@ -85,10 +85,6 @@ class Inputs extends React.Component {
     handleSubmit(event) {
         const inputState = this.prepareResult()
         this.props.handleInput(inputState);
-        for (const [key, source] of Object.entries(this.props.allSources)) {
-            if (this.state.sources[key])
-                source.fetch[this.state.fetchType](inputState)
-        }
 
         event.preventDefault();
     }
