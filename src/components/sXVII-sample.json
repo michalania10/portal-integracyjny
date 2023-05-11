@@ -1,0 +1,602 @@
+[
+  {
+    "id_hasla": 1818,
+    "haslo": {
+      "id_hasla": 1818,
+      "do_oddania": false,
+      "tworca": "SPas",
+      "login": null,
+      "uwagi": "DA: SPas cały",
+      "odsylacze": "",
+      "login_tw": "wiesiek",
+      "czm": "rzecz.",
+      "blokada": false,
+      "gram_liczba_wys": 0,
+      "gram_liczba_wys_l": 0,
+      "informacje_dodatkowe": "",
+      "funkcja": "",
+      "odnosnik": false,
+      "slow_nie_not": false,
+      "slowniki_uwagi": null,
+      "od_kom": null,
+      "od_typ": null,
+      "najstarsze_posw": null,
+      "ndm": "",
+      "licz_odmiana": "",
+      "data_utw": "2006-10-30T22:50:41",
+      "data_mod": "2010-01-06T15:21:00",
+      "stan_opracowania": "w opracowaniu",
+      "od": null
+    },
+    "formy": [
+      {
+        "id_formy": 1869,
+        "forma": "SZKOŁA",
+        "id_hasla": 1818,
+        "gram_info": "ż",
+        "gwiazdka": false,
+        "nawias": false,
+        "homonimia": "",
+        "id_fonetyki": null,
+        "blp": false,
+        "czas_modyfikacji": "1970-01-01T01:00:00",
+        "ndm": null,
+        "typ": "forma hasłowa"
+      }
+    ],
+    "fleksja": [
+      {
+        "id_formy": 28408,
+        "id_hasla": 1818,
+        "czas": "",
+        "stopien": "",
+        "liczba": "lp",
+        "przypadek": "Ms.",
+        "rodzaj": "ż",
+        "osoba": "",
+        "zywotnosc": "",
+        "formy": [
+          {
+            "id_formy_gr": 30505,
+            "id_formy": 28408,
+            "forma": "szkole",
+            "wys": 0,
+            "wys_l": 0,
+            "kolejnosc": 0,
+            "czas_modyfikacji": "1970-01-01T01:00:00",
+            "uwagi": ""
+          }
+        ]
+      },
+      {
+        "id_formy": 28407,
+        "id_hasla": 1818,
+        "czas": "",
+        "stopien": "",
+        "liczba": "lp",
+        "przypadek": "M.",
+        "rodzaj": "ż",
+        "osoba": "",
+        "zywotnosc": "",
+        "formy": [
+          {
+            "id_formy_gr": 30504,
+            "id_formy": 28407,
+            "forma": "szkoła",
+            "wys": 0,
+            "wys_l": 0,
+            "kolejnosc": 0,
+            "czas_modyfikacji": "1970-01-01T01:00:00",
+            "uwagi": ""
+          }
+        ]
+      },
+      {
+        "id_formy": 28409,
+        "id_hasla": 1818,
+        "czas": "",
+        "stopien": "",
+        "liczba": "lm",
+        "przypadek": "D.",
+        "rodzaj": "ż",
+        "osoba": "",
+        "zywotnosc": "",
+        "formy": [
+          {
+            "id_formy_gr": 30506,
+            "id_formy": 28409,
+            "forma": "szkół",
+            "wys": 0,
+            "wys_l": 0,
+            "kolejnosc": 0,
+            "czas_modyfikacji": "1970-01-01T01:00:00",
+            "uwagi": ""
+          }
+        ]
+      },
+      {
+        "id_formy": 28410,
+        "id_hasla": 1818,
+        "czas": "",
+        "stopien": "",
+        "liczba": "lm",
+        "przypadek": "Ms.",
+        "rodzaj": "ż",
+        "osoba": "",
+        "zywotnosc": "",
+        "formy": [
+          {
+            "id_formy_gr": 30507,
+            "id_formy": 28410,
+            "forma": "szkołach",
+            "wys": 0,
+            "wys_l": 0,
+            "kolejnosc": 0,
+            "czas_modyfikacji": "1970-01-01T01:00:00",
+            "uwagi": ""
+          }
+        ]
+      }
+    ],
+    "etymologia": [
+      {
+        "id_formy": 2745,
+        "id_hasla": 1818,
+        "postac": "schola",
+        "wytlumaczenie": "",
+        "moze": false,
+        "ciag": false,
+        "z_postac": "",
+        "jezyki": [
+          {
+            "id_formy": 2745,
+            "jezyk": "łac.",
+            "z": false
+          }
+        ]
+      }
+    ],
+    "slowniki": [
+      {
+        "id_hasla": 1818,
+        "slownik": "kn",
+        "notuje": "nie notuje",
+        "uwagi": "",
+        "warianty": "",
+        "pod": ""
+      },
+      {
+        "id_hasla": 1818,
+        "slownik": "l",
+        "notuje": "nie notuje",
+        "uwagi": "",
+        "warianty": "",
+        "pod": ""
+      },
+      {
+        "id_hasla": 1818,
+        "slownik": "sjp",
+        "notuje": "nie notuje",
+        "uwagi": "",
+        "warianty": "",
+        "pod": ""
+      },
+      {
+        "id_hasla": 1818,
+        "slownik": "sstp",
+        "notuje": "nie notuje",
+        "uwagi": "",
+        "warianty": "",
+        "pod": ""
+      },
+      {
+        "id_hasla": 1818,
+        "slownik": "sw",
+        "notuje": "nie notuje",
+        "uwagi": "",
+        "warianty": "",
+        "pod": ""
+      },
+      {
+        "id_hasla": 1818,
+        "slownik": "swil",
+        "notuje": "nie notuje",
+        "uwagi": "",
+        "warianty": "",
+        "pod": ""
+      },
+      {
+        "id_hasla": 1818,
+        "slownik": "sxvi",
+        "notuje": "nie notuje",
+        "uwagi": "",
+        "warianty": "",
+        "pod": ""
+      },
+      {
+        "id_hasla": 1818,
+        "slownik": "t",
+        "notuje": "nie notuje",
+        "uwagi": "",
+        "warianty": "",
+        "pod": ""
+      }
+    ],
+    "cytaty": [
+      {
+        "id_cytatu": 41000,
+        "typ": "znaczenia",
+        "id_hasla": null,
+        "id_znaczenia": 2013,
+        "id_zwiazku": null,
+        "cytat": "Ieszcze w Szkołach Rawskich byłęm a on tez do kancellaryiey chodził.",
+        "strona": "78v",
+        "rekcja": true,
+        "id_zrodla": 568,
+        "id_kategorii": 0,
+        "id_podkategorii": 0,
+        "cache": "Ieszcze w <span class=\"forma\">Szkołach</span> Rawskich byłęm a on tez do kancellaryiey chodził.",
+        "cache_czas": "2015-03-16T17:52:49.074746"
+      },
+      {
+        "id_cytatu": 41001,
+        "typ": "znaczenia",
+        "id_hasla": null,
+        "id_znaczenia": 2013,
+        "id_zwiazku": null,
+        "cytat": "Na uczysz się tego oczym w szkołach iako zyw niesłyszałes.",
+        "strona": "201v",
+        "rekcja": true,
+        "id_zrodla": 568,
+        "id_kategorii": 0,
+        "id_podkategorii": 0,
+        "cache": "Na uczysz się tego oczym w <span class=\"forma\">szkołach</span> iako zyw niesłyszałes.",
+        "cache_czas": "2015-03-16T17:52:49.06298"
+      }
+    ],
+    "znaczenia": [
+      {
+        "id_znaczenia": 2013,
+        "id_hasla": 1818,
+        "funkcja": "",
+        "definicja": "instytucja ucząca, kształcąca młodzież",
+        "rekcja": "",
+        "lp": 1,
+        "info": "",
+        "lpp": null,
+        "niepewne": false,
+        "nr": null,
+        "typ_def": "semantyczna",
+        "il_podpis": "",
+        "kwalifikatory": null,
+        "cytaty": [
+          {
+            "id_cytatu": 41001,
+            "typ": "znaczenia",
+            "id_hasla": null,
+            "id_znaczenia": 2013,
+            "id_zwiazku": null,
+            "cytat": "Na uczysz się tego oczym w szkołach iako zyw niesłyszałes.",
+            "strona": "201v",
+            "rekcja": true,
+            "id_zrodla": 568,
+            "id_kategorii": 0,
+            "id_podkategorii": 0,
+            "cache": "Na uczysz się tego oczym w <span class=\"forma\">szkołach</span> iako zyw niesłyszałes.",
+            "cache_czas": "2015-03-16T17:52:49.06298"
+          },
+          {
+            "id_cytatu": 41000,
+            "typ": "znaczenia",
+            "id_hasla": null,
+            "id_znaczenia": 2013,
+            "id_zwiazku": null,
+            "cytat": "Ieszcze w Szkołach Rawskich byłęm a on tez do kancellaryiey chodził.",
+            "strona": "78v",
+            "rekcja": true,
+            "id_zrodla": 568,
+            "id_kategorii": 0,
+            "id_podkategorii": 0,
+            "cache": "Ieszcze w <span class=\"forma\">Szkołach</span> Rawskich byłęm a on tez do kancellaryiey chodził.",
+            "cache_czas": "2015-03-16T17:52:49.074746"
+          }
+        ],
+        "zwiazki": [
+          {
+            "id_zwiazku": 8657,
+            "id": 10830,
+            "id_hasla": null,
+            "id_znaczenia": 2013,
+            "typ": "jednoznaczne",
+            "kolejnosc": 0,
+            "typ": "fraz.",
+            "definicja": "ukończyć naukę szkolną",
+            "komentarz": null,
+            "war": null,
+            "od_przysl": null,
+            "przyslowie": null,
+            "formy": [
+              {
+                "id_formy": 9109,
+                "id_zwiazku": 8657,
+                "forma": "ze szkół wyjść",
+                "szyk": false,
+                "homonimia": ""
+              }
+            ],
+            "kwalifikatory": null,
+            "cytaty": [
+              {
+                "id_cytatu": 7382,
+                "typ": "związku",
+                "id_hasla": null,
+                "id_znaczenia": null,
+                "id_zwiazku": 8657,
+                "cytat": "Kładę tedy natym mieyscu, młodym Ludziom ktorzy to po mnie czytać będą. Taką admonitią że by kozdy #z szkoł wyszedszy# starał się oto pilno aby się rzeczom przysłuchał y przypatrzył na Seymach.",
+                "strona": "201",
+                "rekcja": true,
+                "id_zrodla": 568,
+                "id_kategorii": 0,
+                "id_podkategorii": 0,
+                "cache": "Kładę tedy natym mieyscu, młodym Ludziom ktorzy to po mnie czytać będą. Taką admonitią że by kozdy <span class=\"forma\">z szkoł wyszedszy</span> starał się oto pilno aby się rzeczom przysłuchał y przypatrzył na Seymach.",
+                "cache_czas": "2015-03-16T01:25:42.901618"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id_znaczenia": 15911,
+        "id_hasla": 1818,
+        "funkcja": "",
+        "definicja": "umiejętność nabyta przez naukę, wyćwiczenie",
+        "rekcja": "",
+        "lp": 2,
+        "info": "",
+        "lpp": null,
+        "niepewne": false,
+        "nr": null,
+        "typ_def": "semantyczna",
+        "il_podpis": "",
+        "kwalifikatory": null,
+        "cytaty": null,
+        "zwiazki": [
+          {
+            "id_zwiazku": 3592,
+            "id": 672,
+            "id_hasla": null,
+            "id_znaczenia": 15911,
+            "typ": "jednoznaczne",
+            "kolejnosc": 1,
+            "typ": "poł.",
+            "definicja": "zawód żołnierza, rzemiosło wojenne",
+            "komentarz": null,
+            "war": null,
+            "od_przysl": null,
+            "przyslowie": null,
+            "formy": [
+              {
+                "id_formy": 3734,
+                "id_zwiazku": 3592,
+                "forma": "marsowa szkoła",
+                "szyk": false,
+                "homonimia": ""
+              }
+            ],
+            "kwalifikatory": null,
+            "cytaty": [
+              {
+                "id_cytatu": 2999,
+                "typ": "związku",
+                "id_hasla": null,
+                "id_znaczenia": null,
+                "id_zwiazku": 3592,
+                "cytat": "Cny Lanckoronski [...] pioro konkurruie do Herbow Domu twego. Bez ktorych to zgoła Sama się #Marsowa# nie obeydzie #szkoła#.",
+                "strona": "270",
+                "rekcja": true,
+                "id_zrodla": 568,
+                "id_kategorii": 0,
+                "id_podkategorii": 0,
+                "cache": "Cny Lanckoronski [...] pioro konkurruie do Herbow Domu twego. Bez ktorych to zgoła Sama się <span class=\"forma\">Marsowa</span> nie obeydzie <span class=\"forma\">szkoła</span>.",
+                "cache_czas": "2019-07-05T16:05:15.196256"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "zwiazki": [
+      {
+        "id_zwiazku": 9273,
+        "id": 12108,
+        "id_hasla": 1818,
+        "id_znaczenia": null,
+        "typ": "nieprzypisane",
+        "kolejnosc": 0,
+        "typ": "fraz.",
+        "definicja": "",
+        "komentarz": null,
+        "war": null,
+        "od_przysl": null,
+        "przyslowie": null,
+        "formy": [
+          {
+            "id_formy": 9757,
+            "id_zwiazku": 9273,
+            "forma": "do jakiejś szkoły chodzić",
+            "szyk": false,
+            "homonimia": ""
+          }
+        ],
+        "kwalifikatory": null,
+        "cytaty": [
+          {
+            "id_cytatu": 8054,
+            "typ": "związku",
+            "id_hasla": null,
+            "id_znaczenia": null,
+            "id_zwiazku": 9273,
+            "cytat": "Ale coż ia mowię o dziateczkách wászych/ y nárzekam ná ich nieszczęście/ iż niebożątká oddáne są wilkom ná wychowánie: Wy sami Oycowie #do# teyże #szkoły chodzicie#; wiążecie się z Heretykámi/ á nie przebieráiąc żadnych/ ze wszytkimi.",
+            "strona": "10",
+            "rekcja": true,
+            "id_zrodla": 364,
+            "id_kategorii": 0,
+            "id_podkategorii": 0,
+            "cache": "Ale coż ia mowię o dziateczkách wászych/ y nárzekam ná ich nieszczęście/ iż niebożątká oddáne są wilkom ná wychowánie: Wy sami Oycowie <span class=\"forma\">do</span> teyże <span class=\"forma\">szkoły chodzicie</span>; wiążecie się z Heretykámi/ á nie przebieráiąc żadnych/ ze wszytkimi.",
+            "cache_czas": "2020-04-16T14:35:19.939159"
+          }
+        ]
+      },
+      {
+        "id_zwiazku": 10344,
+        "id": 14599,
+        "id_hasla": 1818,
+        "id_znaczenia": null,
+        "typ": "nieprzypisane",
+        "kolejnosc": 0,
+        "typ": "przysł.",
+        "definicja": null,
+        "komentarz": "",
+        "war": false,
+        "od_przysl": false,
+        "przyslowie": "",
+        "formy": null,
+        "kwalifikatory": null,
+        "cytaty": [
+          {
+            "id_cytatu": 9464,
+            "typ": "związku",
+            "id_hasla": null,
+            "id_znaczenia": null,
+            "id_zwiazku": 10344,
+            "cytat": "#Chłopi ná wsi/ á żacy w szkole odmiánie Przełożonych bárzo rádzi#.",
+            "strona": "II, 5",
+            "rekcja": true,
+            "id_zrodla": 203,
+            "id_kategorii": 0,
+            "id_podkategorii": 0,
+            "cache": "<span class=\"forma\">Chłopi ná wsi/ á żacy w szkole odmiánie Przełożonych bárzo rádzi</span>.",
+            "cache_czas": "2021-07-28T11:36:03.702465"
+          }
+        ]
+      },
+      {
+        "id_zwiazku": 5697,
+        "id": 5411,
+        "id_hasla": 1818,
+        "id_znaczenia": null,
+        "typ": "nieprzypisane",
+        "kolejnosc": 0,
+        "typ": "poł.",
+        "definicja": "",
+        "komentarz": null,
+        "war": null,
+        "od_przysl": null,
+        "przyslowie": null,
+        "formy": [
+          {
+            "id_formy": 5974,
+            "id_zwiazku": 5697,
+            "forma": "bakałarz szkoły",
+            "szyk": false,
+            "homonimia": ""
+          }
+        ],
+        "kwalifikatory": null,
+        "cytaty": [
+          {
+            "id_cytatu": 2888,
+            "typ": "związku",
+            "id_hasla": null,
+            "id_znaczenia": null,
+            "id_zwiazku": 5697,
+            "cytat": "Tegoz Roku Nie iaki Iozef J[a]worski #Bakałarz# na ten czasz #Skoły# Zywieckiey, w Swieta Wielkanocne skrwawił Koscioł Zywiecki.",
+            "strona": "224",
+            "rekcja": true,
+            "id_zrodla": 628,
+            "id_kategorii": 0,
+            "id_podkategorii": 0,
+            "cache": "Tegoz Roku Nie iaki Iozef J[a]worski <span class=\"forma\">Bakałarz</span> na ten czasz <span class=\"forma\">Skoły</span> Zywieckiey, w Swieta Wielkanocne skrwawił Koscioł Zywiecki.",
+            "cache_czas": "2015-03-16T12:42:13.601296"
+          }
+        ]
+      },
+      {
+        "id_zwiazku": 864,
+        "id": 4735,
+        "id_hasla": 1818,
+        "id_znaczenia": null,
+        "typ": "nieprzypisane",
+        "kolejnosc": 1,
+        "typ": "poł.",
+        "definicja": "",
+        "komentarz": null,
+        "war": null,
+        "od_przysl": null,
+        "przyslowie": null,
+        "formy": [
+          {
+            "id_formy": 902,
+            "id_zwiazku": 864,
+            "forma": "bachusowa szkoła",
+            "szyk": false,
+            "homonimia": ""
+          }
+        ],
+        "kwalifikatory": null,
+        "cytaty": [
+          {
+            "id_cytatu": 2325,
+            "typ": "związku",
+            "id_hasla": null,
+            "id_znaczenia": null,
+            "id_zwiazku": 864,
+            "cytat": "Ale poczet @Bachusów@ mija, gdzie się sieką, woląc skoczyć ku górze kapreolę leką i galardę okrągłym wieść z panienką kołem, a drudzy wywracają węgierskie za stołem, bo wszyscy #Bachusowej szkoły# zwolennicy: ten gładkiej, ów kurowej dzierży się śklenicy, aż ten usnął, owego do domu prowadzą, a ledwie mu stawiajac nogi wszyscy radzą. Temu kozieł za uchem z długim bąkiem wrzeszczy, a on mu przedrzeźniając, depresem swym trzeszczy; ten też kędyś wrócił część, dobrze że na stronie, a piesek go chędoży, siedząc na ogonie.",
+            "strona": "341-342",
+            "rekcja": true,
+            "id_zrodla": 426,
+            "id_kategorii": 0,
+            "id_podkategorii": 0,
+            "cache": "Ale poczet Bachusów mija, gdzie się sieką, woląc skoczyć ku górze kapreolę leką i galardę okrągłym wieść z panienką kołem, a drudzy wywracają węgierskie za stołem, bo wszyscy <span class=\"forma\">Bachusowej szkoły</span> zwolennicy: ten gładkiej, ów kurowej dzierży się śklenicy, aż ten usnął, owego do domu prowadzą, a ledwie mu stawiajac nogi wszyscy radzą. Temu kozieł za uchem z długim bąkiem wrzeszczy, a on mu przedrzeźniając, depresem swym trzeszczy; ten też kędyś wrócił część, dobrze że na stronie, a piesek go chędoży, siedząc na ogonie.",
+            "cache_czas": "2015-03-16T08:14:06.991512"
+          }
+        ]
+      },
+      {
+        "id_zwiazku": 10373,
+        "id": 14732,
+        "id_hasla": 1818,
+        "id_znaczenia": null,
+        "typ": "nieprzypisane",
+        "kolejnosc": 0,
+        "typ": "przysł.",
+        "definicja": null,
+        "komentarz": "",
+        "war": false,
+        "od_przysl": false,
+        "przyslowie": "",
+        "formy": null,
+        "kwalifikatory": null,
+        "cytaty": [
+          {
+            "id_cytatu": 9499,
+            "typ": "związku",
+            "id_hasla": null,
+            "id_znaczenia": null,
+            "id_zwiazku": 10373,
+            "cytat": "#Zak béz ksiąg chodząc do szkoły/ zgodzi się potem páść woły#.",
+            "strona": "1297",
+            "rekcja": true,
+            "id_zrodla": 612,
+            "id_kategorii": 0,
+            "id_podkategorii": 0,
+            "cache": "<span class=\"forma\">Zak béz ksiąg <span class=\"forma\">chodząc</span> do szkoły/ zgodzi się potem páść woły</span>.",
+            "cache_czas": "2020-04-16T14:35:21.560365"
+          }
+        ]
+      }
+    ],
+    "podhasla": null,
+    "id_nadhasla": null
+  }
+]

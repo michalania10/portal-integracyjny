@@ -1,79 +1,81 @@
 import React from 'react';
-import Table from "./Table";
-import { FetchInfo, FetchState, fetchAndParse } from "./FetchInfo";
+import Table from './Table';
+import Source from './Source'
+import {FetchInfo, FetchState, fetchAndParse, updatedState} from "./FetchInfo";
 
-const korbaAddress = "https://korba.edu.pl/";
+const korbaAddress = "https://korba.edu.pl/"
 
-const korbaQuotesLimit = 5;
-const korbaCtxLimit = 10;
+const korbaQuotesLimit = 5
+const korbaCtxLimit = 10
 
 function korbaGetQuotesUrl(korbaQuery) {
-    return korbaAddress + "api/get_quotes/" + encodeURIComponent(korbaQuery);
+    return korbaAddress + "api/get_quotes/" + encodeURIComponent(korbaQuery)
 }
 
 function korbaGetFormsUrl(korbaQuery) {
-    return korbaAddress + "api/get_forms_for_query/" + encodeURIComponent(korbaQuery);
+    return korbaAddress + "api/get_forms_for_query/" + encodeURIComponent(korbaQuery)
 }
 
 function korbaLink(korbaQuery) {
-    return korbaAddress + "query_corpus_by_url/korba_full_foreign/" + encodeURIComponent(korbaQuery);
+    return korbaAddress + "query_corpus_by_url/korba_full_foreign/" + encodeURIComponent(korbaQuery)
 }
 
-function fetchKorbaData(inputState, callback) {
-    // TODO: case insensitive
-    const formsQueryPart = queryPart(inputState.fetchType, inputState.query);
-    const formsQuery = "[" + formsQueryPart + "]";
+function fetchKorbaData(stateLogic) {
+    let inputState = stateLogic.input()
+
+    const formsQueryPart = queryPart(inputState.fetchType, inputState.query)
+    const formsQuery = "[" + formsQueryPart + "]"
+    let formsUrl = korbaGetFormsUrl(formsQuery)
+    let quotesUrl = korbaGetQuotesUrl(formsQuery)
+    stateLogic.setState({ formsFetch: FetchState.empty(formsUrl), quotesFetch: FetchState.empty(quotesUrl)})
 
     fetchAndParse(korbaGetFormsUrl(formsQuery))
-        .then(fetchState => callback("formsFetch", fetchState));
+        .then(fetchState => stateLogic.setState(oldState => updatedState(oldState, "formsFetch", fetchState)))
     fetchAndParse(korbaGetQuotesUrl(formsQuery))
-        .then(fetchState => callback("quotesFetch", fetchState));
+        .then(fetchState => stateLogic.setState(oldState => updatedState(oldState, "quotesFetch", fetchState)))
 }
 
-function initKorbaState() {
-    return {
-        formsFetch: FetchState.empty(),
-        quotesFetch: FetchState.empty()
-    }
+function korbaSource() {
+    return new Source('korba', fetchKorbaData, fetchKorbaData)
 }
 
 function escapeQuotes(string) {
-    return string.replaceAll("\"", "\\\"");
+    return string.replaceAll("\"", "\\\"")
 }
 
 function queryPart(attr, value) {
-    return  attr + "=\"" + escapeQuotes(value) + "\"";
+    return  attr + "=\"" + escapeQuotes(value) + "\""
 }
 
 function quotesQuery(formsPart, tag) {
-    return "[" + formsPart + " & " + queryPart("tag", tag) + "]";
+    return "[" + formsPart + " & " + queryPart("tag", tag) + "]"
 }
 
 function Korba(props) {
-    if (!props.query) return <></>;
+    if (!props.query) return <></>
 
     const formsQueryPart = queryPart(props.fetchType, props.query)
     const forms = props.formsFetch.result ? props.formsFetch.result.forms : []
     const formsElem = props.formsFetch.result ?
             <KorbaForms formsQueryPart={formsQueryPart} forms={forms} translation={props.translation} /> :
-            <FetchInfo {...props.formsFetch} translation={props.translation} />;
-    const quotes = props.quotesFetch.result ? props.quotesFetch.result.quotes : [];
+            <FetchInfo {...props.formsFetch} translation={props.translation} />
+    const quotes = props.quotesFetch.result ? props.quotesFetch.result.quotes : []
     const quotesElem = (forms.length === 0) ? <></> :
         (props.quotesFetch.result ? <KorbaQuotes quotes={quotes} translation={props.translation} /> :
-            <FetchInfo {...props.quotesFetch} translation={props.translation} />);
+            <FetchInfo {...props.quotesFetch} translation={props.translation} />)
 
     return <div>
-                <div>{props.translation.get("korba")}</div>
+                <h3>{props.translation.get("korba")}</h3>
                 {formsElem}
                 {quotesElem}
-           </div>;
+           </div>
 }
 
 function KorbaForms(props) {
     if (props.forms.length === 0)
-        return <div>{props.translation.get("noResults")}</div>;
+        return <div>{props.translation.get("noResults")}</div>
     const sumResults = props.forms.map(form => form.frequency)
-        .reduce((sum, current) => sum + current, 0);
+        .reduce((sum, current) => sum + current, 0)
 
     const formsWithLinks = props.forms.map(form => {
         return {
@@ -82,8 +84,8 @@ function KorbaForms(props) {
             link: (<a href={korbaLink(quotesQuery(props.formsQueryPart, form.tag))} target="blank">
                 {props.translation.get("korba.link")}
             </a>)
-        };
-    });
+        }
+    })
 
     return <div>
             {props.translation.get("korba.allResults")}: {sumResults}
@@ -93,19 +95,19 @@ function KorbaForms(props) {
             <Table headers={["orth", "tag", "frequency", "link"]}
                    data={formsWithLinks}
                    translation={props.translation}/>
-        </div>;
+        </div>
 }
 
 function korbaWordToObject(korbaWord) {
-    const result = {};
+    const result = {}
     for (const [key, value] of korbaWord) {
-        result[key] = value;
+        result[key] = value
     }
-    return result;
+    return result
 }
 
 function getHit(quote) {
-    return korbaWordToObject(quote.hit[quote.endPosition]);
+    return korbaWordToObject(quote.hit[quote.endPosition])
 }
 
 function createLeftContext(leftCtx, limit) {
@@ -127,15 +129,15 @@ function createRightContext(rightCtx, limit) {
 }
 
 function KorbaHit(props) {
-    return (<>
+    return <>
         <strong>{props.hit.orth}</strong>
         <u>{props.hit.tag}</u>
-    </>);
+    </>
 }
 
 function KorbaQuotes(props) {
     const limit = props.limit ? props.limit : korbaQuotesLimit
-    const ctxLimit = props.ctxLimit ? props.ctxLimit : korbaCtxLimit;
+    const ctxLimit = props.ctxLimit ? props.ctxLimit : korbaCtxLimit
     const quotes = selectQuotes(props.quotes, limit)
         .map(quote => {
             return {
@@ -144,35 +146,35 @@ function KorbaQuotes(props) {
                 "korba.hit": (<KorbaHit hit={getHit(quote)} />),
                 "korba.rightCtx": createRightContext(quote.right, ctxLimit),
                 "korba.documentKey": quote.documentKey
-            };
+            }
         })
 
     return <Table headers={["korba.leftCtx", "korba.hit", "korba.rightCtx", "korba.documentKey"]}
                   data={quotes}
-                  translation={props.translation}/>;
+                  translation={props.translation}/>
 }
 
 function selectQuotes(quotes, limit) {
-    let otherQuotes = [];
-    let quotesToCheck = quotes;
-    const resultQuotes = [];
+    let otherQuotes = []
+    let quotesToCheck = quotes
+    const resultQuotes = []
 
     while (resultQuotes.length < limit && quotesToCheck.length > 0) {
         const quotedDocuments = {}
         for (let idx = 0; idx < quotesToCheck.length && resultQuotes.length < limit; idx++) {
-            const quote = quotesToCheck[idx];
+            const quote = quotesToCheck[idx]
             if (quotedDocuments[quote.documentKey]) {
-                otherQuotes[otherQuotes.length] = quote;
+                otherQuotes[otherQuotes.length] = quote
             } else {
-                quotedDocuments[quote.documentKey] = true;
+                quotedDocuments[quote.documentKey] = true
                 resultQuotes[resultQuotes.length] = quote
             }
         }
-        quotesToCheck = otherQuotes;
-        otherQuotes = [];
+        quotesToCheck = otherQuotes
+        otherQuotes = []
     }
 
-    return resultQuotes;
+    return resultQuotes
 }
 
-export { Korba, fetchKorbaData, initKorbaState };
+export { Korba, korbaSource }

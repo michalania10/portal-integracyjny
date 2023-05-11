@@ -4,6 +4,7 @@ const TranslationPl = {
   "inputs.value": "Zapytanie",
   "inputs.sources": "Żródła do przeszukania",
   "inputs.submit": "Szukaj",
+  "inputs.query": "Zapytanie",
   "korba": "Korpus barokowy",
   "korba.allResults": "Wystąpienia",
   "korba.leftCtx": "Lewy kontekst",
@@ -12,6 +13,7 @@ const TranslationPl = {
   "korba.documentKey": "Skrót tekstu",
   "korba.link": "Wyniki z korpusu barokowego",
   "sXVII": "Słownik XVII wieku",
+  "sXVII.znaczenia": "Znaczenia",
   "cbdu": "Cyfrowa Biblioteka Druków Ulotnych",
   "kartoteka": "Kartoteka",
   "loading": "Trwa ściąganie danych",
@@ -19,7 +21,9 @@ const TranslationPl = {
   "orth": "Forma",
   "tag": "Znacznik morfosyntaktyczny",
   "frequency": "Wystąpienia",
-  "link": "Link"
+  "link": "Link",
+  "search.byBases": "Po lematach znalezionych w innych źródłach",
+  "": ""
 };
 
 

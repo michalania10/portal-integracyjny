@@ -1,15 +1,16 @@
 import React from 'react';
 
 class FetchState {
-    constructor(ready, error, result) {
-        this.ready = ready;
-        this.error = error;
-        this.result = result;
+    constructor(url, ready, error, result) {
+        this.url = url
+        this.ready = ready
+        this.error = error
+        this.result = result
     }
 
-    static empty() { return new FetchState(false, null, null); }
-    static error(err) { return new FetchState(true, err, null); }
-    static ok(res) { return new FetchState(true, null, res); }
+    static empty(url) { return new FetchState(url, false, null, null); }
+    static error(url, err) { return new FetchState(url, true, err, null); }
+    static ok(url, res) { return new FetchState(url, true, null, res); }
 }
 
 function fetchAndParse(url) {
@@ -17,41 +18,43 @@ function fetchAndParse(url) {
         .then(res => res.json())
         .then(response => {
                 console.log("Fetching response", url, response);
-                return FetchState.ok(response);
+                return FetchState.ok(url, response);
             },
             error => {
                 console.log("Fetching error", url, error);
-                return FetchState.error(error);
+                return FetchState.error(url, error);
             });
 }
 
 function FetchInfo(props) {
-    if (!props.ready) return (
-        <div>{props.translation.get("loading")}</div>
-    );
-    if (props.error) return (
-        <div><strong>{props.error.message}</strong></div>
-    );
+    if (!props.ready)
+        return <div>{props.translation.get("loading")} {props.url}</div>
+    if (props.error)
+        return <div><strong>{props.error.message}</strong></div>
     return <></>;
 }
 
-function updatedState(oldState, fields, oldToNewMapping) {
-    const newState = { ...oldState }
+function updatedStateRec(oldState, fields, pos, mapping) {
+    if (pos >= fields.length) return mapping(oldState)
 
-    let toAssign = newState;
-    let fieldName = fields[0];
-    let oldValue = toAssign[fieldName];
+    let idx = fields[pos]
+    let newState = !oldState ? (Number.isInteger(idx) ? [] : {})
+                             : (Array.isArray(oldState) ? [...oldState] : {...oldState})
 
-    for (let fieldsIdx = 1; fieldsIdx < fields.length; fieldsIdx++) {
-        toAssign[fieldName] = { ...oldValue };
-        toAssign = toAssign[fieldName];
+    newState[idx] = updatedState(oldState ? oldState[idx] : oldState, fields, pos + 1, mapping)
+}
 
-        fieldName = fields[fieldsIdx];
-        oldValue = toAssign[fieldName];
-    }
+function updatedState(oldState, fields, valueMapping) {
+    if (typeof fields === 'string' || fields instanceof String)
+        fields = fields.split(".")
+    else if (Number.isInteger(fields))
+        fields = [fields]
 
-    toAssign[fieldName] = oldToNewMapping(oldValue)
-    return newState;
+    let mapping = (typeof valueMapping === 'function' || valueMapping instanceof Function) ?
+        valueMapping :
+        unused => valueMapping
+
+    return updatedStateRec(oldState, fields, 0, mapping)
 }
 
 export { FetchInfo, FetchState, fetchAndParse, updatedState }
