@@ -53,17 +53,19 @@ class App extends React.Component {
                         allSearchTypes={this.state.allSearchTypes}
                         handleInputState={this.handleInputState}
                         handleSourceData={this.handleSourceData} />
-                <ConditionalKorba translation={this.state.translation} {...this.state.inputState.sourceData}/>
+                <ConditionalKorba translation={this.state.translation}
+                        sourceData={this.state.sourceData}/>
         </div>
     );
   }
 }
 
 function ConditionalKorba(props) {
-    return (props[korba.key()]) ?
+    return (props.sourceData && props.sourceData[korba.key()]) ?
         <>
             <hr />
-            <Korba { ...props[korba.key()] } translation={props.translation} />
+            <Korba { ...props.sourceData[korba.key()]}
+                   translation={props.translation}/>
         </>
         : <></>
 }

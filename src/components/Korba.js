@@ -27,7 +27,11 @@ function fetchKorbaData(stateLogic) {
     const formsQuery = "[" + formsQueryPart + "]"
     let formsUrl = korbaGetFormsUrl(formsQuery)
     let quotesUrl = korbaGetQuotesUrl(formsQuery)
-    stateLogic.setState({ formsFetch: FetchState.empty(formsUrl), quotesFetch: FetchState.empty(quotesUrl)})
+    stateLogic.setState({
+        formsFetch: FetchState.empty(formsUrl),
+        quotesFetch: FetchState.empty(quotesUrl),
+        ...inputState,
+    })
 
     fetchAndParse(korbaGetFormsUrl(formsQuery))
         .then(fetchState => stateLogic.setState(oldState => updatedState(oldState, "formsFetch", fetchState)))
