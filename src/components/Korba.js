@@ -23,7 +23,7 @@ function korbaLink(korbaQuery) {
 function fetchKorbaData(stateLogic) {
     let inputState = stateLogic.input()
 
-    const formsQueryPart = queryPart(inputState.fetchType, inputState.query)
+    const formsQueryPart = queryPart(inputState.searchType, inputState.query)
     const formsQuery = "[" + formsQueryPart + "]"
     let formsUrl = korbaGetFormsUrl(formsQuery)
     let quotesUrl = korbaGetQuotesUrl(formsQuery)
@@ -54,7 +54,7 @@ function quotesQuery(formsPart, tag) {
 function Korba(props) {
     if (!props.query) return <></>
 
-    const formsQueryPart = queryPart(props.fetchType, props.query)
+    const formsQueryPart = queryPart(props.searchType, props.query)
     const forms = props.formsFetch.result ? props.formsFetch.result.forms : []
     const formsElem = props.formsFetch.result ?
             <KorbaForms formsQueryPart={formsQueryPart} forms={forms} translation={props.translation} /> :

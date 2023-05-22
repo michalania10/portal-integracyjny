@@ -2,7 +2,7 @@
 // stateLogic should have fields:
 // {
 //     input() // returns info about selected input {
-//         fetchType: 'base' or 'orth',
+//         searchType: 'base' or 'orth',
 //         sources: { source: true - if source was selected },
 //         query: string
 //     }
@@ -12,20 +12,20 @@
 // }
 
 class Source {
-    constructor(key, fetchBase, fetchOrth) {
+    constructor(key, searchBase, searchOrth) {
         this.mKey = key
-        this.mFetchBase = fetchBase // function(stateLogic) for fetching base
-        this.mFetchOrth = fetchOrth // function(stateLogic) for fetching orth
+        this.mSearchBase = searchBase // function(stateLogic) for fetching base
+        this.mSearchOrth = searchOrth // function(stateLogic) for fetching orth
     }
 
     // Source name - key to use to store state
     key() { return this.mKey; }
 
     // Can source be searched for data for the given search type
-    canSearch(fetchType) {
-        switch (fetchType) {
-            case 'base': return !!this.mFetchBase
-            case 'orth': return !!this.mFetchOrth
+    canSearch(searchType) {
+        switch (searchType) {
+            case 'base': return !!this.mSearchBase
+            case 'orth': return !!this.mSearchOrth
             default: return false
         }
     }
@@ -33,14 +33,14 @@ class Source {
     fetchData(stateLogic) {
         let inputState = stateLogic.input()
         if (!inputState.sources[this.key()]) return
-        switch (inputState.fetchType) {
+        switch (inputState.searchType) {
             case 'base':
-                if (this.mFetchBase)
-                    this.mFetchBase(stateLogic)
+                if (this.mSearchBase)
+                    this.mSearchBase(stateLogic)
                 break
             case 'orth':
-                if (this.mFetchOrth)
-                    this.mFetchOrth(stateLogic)
+                if (this.mSearchOrth)
+                    this.mSearchOrth(stateLogic)
                 break
             default:
                 // do nothing

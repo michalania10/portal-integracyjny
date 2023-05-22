@@ -4,44 +4,46 @@ import {updatedState} from "./FetchInfo";
 function initInputState(allSources) {
     return {
         query: "",
-        fetchType: 'base',
-        sources: allValidSources(allSources, 'base')
+        searchType: 'base',
+        sources: allValidSources(allSources, 'base') // { sourceKey: boolean - if it should be used }
     }
 }
 
-function validSources(allSources, inputState) {
-    let sources = {}
+function validSources(allSources, searchType, sources) {
+    let resultSources = {}
     for (const [key, source] of Object.entries(allSources))
-        sources[key] = inputState.sources[key] && source.canSearch(inputState.fetchType)
-    return sources
+        resultSources[key] = sources[key] && source.canSearch(searchType)
+    return resultSources
 }
 
-function allValidSources(allSources, fetchType) {
-    return validSources(allSources, { fetchType: fetchType, sources: allSources })
+function allValidSources(allSources, searchType) {
+    return validSources(allSources, searchType, allSources)
 }
 
-function validState(allSources, allFetchTypes, inputState) {
+function validState(allSources, allSearchTypes, inputState) {
     const defaultState = initInputState(allSources)
     if (!inputState)
         return defaultState;
     let resultState = {
         query: inputState.query ? inputState.query : defaultState.query,
-        fetchType: (inputState.fetchType && allFetchTypes[inputState.fetchType]) ? inputState.fetchType : defaultState.fetchType,
+        searchType: (inputState.searchType && allSearchTypes[inputState.searchType]) ? inputState.searchType : defaultState.searchType,
     }
-    let resultSources = validSources(allSources, { fetchType: resultState.fetchType, sources: inputState.sources})
-    resultState.sources = (resultSources.length === 0) ? allValidSources(allSources, resultState.fetchType) : resultSources
+    let resultSources = validSources(allSources, resultState.searchType, inputState.sources)
+    resultState.sources = (Object.values(resultSources).filter(x => x).length === 0) ?
+        allValidSources(allSources, resultState.searchType) : resultSources
     return resultState
 }
 
 class Inputs extends React.Component {
     constructor(props) {
         super(props);
-        this.state = validState(props.allSources, props.allFetchTypes, props.state)
+        this.state = initInputState(props.allSources)
         this.updateState = this.updateState.bind(this);
         this.updateSourceSelection = this.updateSourceSelection.bind(this);
-        this.updateFetchType = this.updateFetchType.bind(this);
+        this.updateSearchType = this.updateSearchType.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleInput = props.handleInput
+        this.handleInputState = props.handleInputState
+        this.handleSourceData = props.handleSourceData
     }
 
     updateState(field, value) {
@@ -52,32 +54,25 @@ class Inputs extends React.Component {
         this.setState(oldState => updatedState(oldState, ["sources", source], value))
     }
 
-    updateFetchType(fetchType) {
-        this.updateState("fetchType", fetchType);
-        this.updateState("sources", allValidSources(this.props.allSources, fetchType));
+    updateSearchType(searchType) {
+        this.updateState("searchType", searchType);
+        this.updateState("sources", allValidSources(this.props.allSources, searchType));
     }
 
     prepareResult() {
-        return {
-            query: this.state.query,
-            fetchType: this.state.fetchType,
-            sources: { ...this.state.sources }
-        }
+        return { ...this.state }
     }
 
-    updateSourceData(key, valueMapping) {
-        this.updateState(["sourceData", key], valueMapping)
-        this.handleInput(this.state)
-    }
-
-    handleSubmit() {
-        this.updateState("sourceData", {});
+    handleSubmit(event) {
+        event.preventDefault()
         let inputState = this.prepareResult()
+        this.handleInputState(inputState)
+        this.handleSourceData({})
         for (const [key, source] of Object.entries(this.props.allSources)) {
             if (inputState.sources[key]) {
                 let stateLogic = {
                     input: () => this.prepareResult(),
-                    setState: mapping => this.updateSourceData(key, mapping)
+                    setState: mapping => this.handleSourceData(oldSourceData => updatedState(oldSourceData, key, mapping))
                 }
                 source.fetchData(stateLogic)
             }
@@ -85,7 +80,7 @@ class Inputs extends React.Component {
     }
 
     render() {
-        return <form onSubmit={event => this.handleSubmit()}>
+        return <form onSubmit={this.handleSubmit}>
             <label htmlFor="inputs.query">
                 {this.props.translation.get("inputs.query")}
             </label>
@@ -93,16 +88,16 @@ class Inputs extends React.Component {
                    onChange={event => this.updateState("query", event.target.value)}
                    defaultValue={this.state.query}/>
 
-            <label htmlFor="inputs.fetchType">
-                {this.props.translation["inputs.fetchType"]}
+            <label htmlFor="inputs.searchType">
+                {this.props.translation.get("inputs.searchType")}
             </label>
-            <select name="f" id="inputs.fetchType"
-                    onChange={event => this.updateFetchType(event.target.value)}
-                    defaultValue={this.state.fetchType}>
+            <select name="t" id="inputs.searchType"
+                    onChange={event => this.updateSearchType(event.target.value)}
+                    defaultValue={this.state.searchType}>
                 {
-                    this.props.allFetchTypes.map(fetchType =>
-                        <option key={fetchType} value={fetchType}>
-                            {this.props.translation.get("inputs." + fetchType)}
+                    this.props.allSearchTypes.map(searchType =>
+                        <option key={searchType} value={searchType}>
+                            {this.props.translation.get("inputs." + searchType)}
                         </option>)
                 }
             </select>
@@ -112,7 +107,7 @@ class Inputs extends React.Component {
                 {Object.entries(this.props.allSources).map(entry => {
                     const id = entry[0];
                     const source = entry[1];
-                    const allowed = source.canSearch(this.state.fetchType);
+                    const allowed = source.canSearch(this.state.searchType);
                     const checked = !! (allowed && this.state.sources[id]);
                     return (<div key={id}>
                         <input type="checkbox" name={id} id={id}

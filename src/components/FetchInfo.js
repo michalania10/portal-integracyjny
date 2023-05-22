@@ -41,7 +41,8 @@ function updatedStateRec(oldState, fields, pos, mapping) {
     let newState = !oldState ? (Number.isInteger(idx) ? [] : {})
                              : (Array.isArray(oldState) ? [...oldState] : {...oldState})
 
-    newState[idx] = updatedState(oldState ? oldState[idx] : oldState, fields, pos + 1, mapping)
+    newState[idx] = updatedStateRec(oldState ? oldState[idx] : oldState, fields, pos + 1, mapping)
+    return newState
 }
 
 function updatedState(oldState, fields, valueMapping) {

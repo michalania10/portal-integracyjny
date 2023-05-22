@@ -8,12 +8,13 @@ import { Inputs, initInputState } from './components/Inputs'
 import { Translation, TranslationPl } from './components/TranslationPl';
 
 const translation = new Translation(TranslationPl);
+const korba = korbaSource()
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.handleInputState = this.handleInputState.bind(this)
-        let korba = korbaSource()
+        this.handleSourceData = this.handleSourceData.bind(this)
 
         let allSources = {}
         allSources[korba.key()] = korba
@@ -22,16 +23,16 @@ class App extends React.Component {
         //     cbdu: null,
         //     kartoteka: null
         // }
-        const allFetchTypes = ['orth', 'base']
-        this.state = this.initState(allSources, allFetchTypes)
+        const allSearchTypes = ['orth', 'base']
+        this.state = this.initState(allSources, allSearchTypes)
     }
 
-    initState(allSources, allFetchTypes) {
+    initState(allSources, allSearchTypes) {
         return {
             inputState: initInputState(allSources),
             translation: translation,
             allSources,
-            allFetchTypes,
+            allSearchTypes,
             sourceData: {}
         }
     }
@@ -40,13 +41,18 @@ class App extends React.Component {
         this.setState(oldState => updatedState(oldState, "inputState", inputState))
     }
 
+    handleSourceData(mapping) {
+        this.setState(oldState => updatedState(oldState, "sourceData", mapping))
+    }
+
     render() {
         return (
             <div>
                 <Inputs translation={this.state.translation}
                         allSources={this.state.allSources}
-                        allFetchTypes={this.state.allFetchTypes}
-                        handleInput={this.handleInputState} />
+                        allSearchTypes={this.state.allSearchTypes}
+                        handleInputState={this.handleInputState}
+                        handleSourceData={this.handleSourceData} />
                 <ConditionalKorba translation={this.state.translation} {...this.state.inputState.sourceData}/>
         </div>
     );
@@ -54,10 +60,10 @@ class App extends React.Component {
 }
 
 function ConditionalKorba(props) {
-    return (props.korba) ?
+    return (props[korba.key()]) ?
         <>
             <hr />
-            <Korba {...props.korba} translation={props.translation} />
+            <Korba { ...props[korba.key()] } translation={props.translation} />
         </>
         : <></>
 }

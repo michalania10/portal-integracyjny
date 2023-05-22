@@ -1,4 +1,5 @@
 const TranslationPl = {
+  "inputs.searchType": "Rodzaj wyszukiwania",
   "inputs.orth": "Forma",
   "inputs.base": "Lemat",
   "inputs.value": "Zapytanie",
