@@ -3,12 +3,14 @@
 
 import React from 'react';
 import { updatedState } from "./components/FetchInfo";
-import { Korba, korbaSource } from './components/Korba';
 import { Inputs, initInputState } from './components/Inputs'
 import { Translation, TranslationPl } from './components/TranslationPl';
+import { Korba, korbaSource } from './components/Korba';
+import { SXVII, sXVIIsource } from './components/SVXII'
 
 const translation = new Translation(TranslationPl);
 const korba = korbaSource()
+const sXVII = sXVIIsource()
 
 class App extends React.Component {
     constructor(props) {
@@ -18,6 +20,7 @@ class App extends React.Component {
 
         let allSources = {}
         allSources[korba.key()] = korba
+        allSources[sXVII.key()] = sXVII
         // {
         //     sXVII: null,
         //     cbdu: null,
@@ -53,8 +56,8 @@ class App extends React.Component {
                         allSearchTypes={this.state.allSearchTypes}
                         handleInputState={this.handleInputState}
                         handleSourceData={this.handleSourceData} />
-                <ConditionalKorba translation={this.state.translation}
-                        sourceData={this.state.sourceData}/>
+                <ConditionalKorba translation={this.state.translation} sourceData={this.state.sourceData}/>
+                <ConditionalSXVII translation={this.state.translation} sourceData={this.state.sourceData}/>
         </div>
     );
   }
@@ -66,6 +69,15 @@ function ConditionalKorba(props) {
             <hr />
             <Korba { ...props.sourceData[korba.key()]}
                    translation={props.translation}/>
+        </>
+        : <></>
+}
+
+function ConditionalSXVII(props) {
+    return (props.sourceData && props.sourceData[sXVII.key()]) ?
+        <>
+            <hr />
+            <SXVII { ...props.sourceData[sXVII.key()]} translation={props.translation}/>
         </>
         : <></>
 }
