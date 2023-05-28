@@ -20,6 +20,7 @@
     zmienić endpoint w serwerze korby
 - [ ] liczba zwracanych przykładów to w tej chwili 10, ale może można zwiększyć to w ustawieniach APi,
   wtedy wybór będzie większy
+  - no nie mozna
   - ** kogo mam o to spytać?**  
 - [x] przy cytatach nie da się wyświetlić roku - nie jest dostępny przez API
 - [ ] wielkość liter przy przeszukiwaniu po formach: domyślnie nie uwzględniamy
@@ -34,13 +35,19 @@
 - Api
   - https://xvii-wiek.ijp.pan.pl/ajax/json.php, który przyjmuje dwa parametry:
     - hasło - wyrażenie regularne opisujące wyszukiwaną formę hasłową
-    - elementy - opcjonalna lista umożliwiająca ograniczenie ilości zwracanej informacji (pełen opis hasła SXVII jest szalenie rozbudowany). Możliwe elementy to formy/fleksja/etymologia/slowniki/cytaty/znaczenia/zwiazki/podhasla . Jeśli nie podano tego parametru, zwracane są wszystkie. Jeśli ma być zwróconych kilka elementów, należy je wymienić po przecinku. Warto wspomnieć, że ograniczenie liczby elementów znacznie przyspiesza czas przygotowywania odpowiedzi API.
+    - elementy - opcjonalna lista umożliwiająca ograniczenie ilości zwracanej informacji
+      (pełen opis hasła SXVII jest szalenie rozbudowany).
+      Możliwe elementy to formy/fleksja/etymologia/slowniki/cytaty/znaczenia/zwiazki/podhasla.
+      Jeśli nie podano tego parametru, zwracane są wszystkie.
+      Jeśli ma być zwróconych kilka elementów, należy je wymienić po przecinku.
+      Warto wspomnieć, że ograniczenie liczby elementów znacznie przyspiesza
+      czas przygotowywania odpowiedzi API.
       np. https://xvii-wiek.ijp.pan.pl/ajax/json.php?haslo=^szkoła$&elementy=znaczenia,formy
-- [ ] Słownik - wyświetlanie wyników mniej więcej tak jak w KorBie, ale wraz z cytatem (cytatami)
-- [ ] najlepiej pierwszy cytat dla każdego znaczenia (jeśli się da) 
+- [x] Słownik - wyświetlanie wyników mniej więcej tak jak w KorBie, ale wraz z cytatem (cytatami)
+- [x] najlepiej pierwszy cytat dla każdego znaczenia (jeśli się da) 
 - [ ] czy da się umożliwić kliknięcie w kolejne znaczenie
   i przekierowanie od razu do tego znaczenia w Słowniku (rozwiniętego)
-
+    - nie da sie 
 # Dwujęzyczny serwis
 - [ ] Wersja angielska
 

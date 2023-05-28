@@ -1,12 +1,11 @@
 import React from 'react';
-import Table from "./Table";
 import {FetchInfo, FetchState, fetchAndParse, updatedState} from "./FetchInfo";
 import Source from "./Source";
 
 const sXVIIAdress = "https://xvii-wiek.ijp.pan.pl/";
 
 function searchUrl(base) {
-    return sXVIIAdress + "ajax/json.php?elementy=haslo,znaczenia,formy&haslo=^" + encodeURIComponent(base) +"$";
+    return sXVIIAdress + "ajax/json.php?elementy=haslo,znaczenia,form,cytaty&haslo=^" + encodeURIComponent(base) +"$";
 }
 
 function sXVIIlink(id_hasla) {
@@ -62,17 +61,31 @@ function SXVIIElemHaslo(props) {
     return <></>
 }
 
+function buildCytatyMap(cytaty) {
+    const map = {}
+    if (cytaty)
+        for (const cytat of cytaty)
+            if (cytat.typ == "znaczenia" && cytat.id_znaczenia)
+                map[cytat.id_znaczenia] = cytat.cytat
+    return map
+}
+
 function SXVIIElemZnaczenia(props) {
     if (props.elem.znaczenia && ! props.elem.znaczenia.length == 0) {
+        const cytaty = buildCytatyMap(props.elem.cytaty)
         return <>
             <div><strong>{props.translation.get("sXVII.znaczenia")}</strong></div>
             <ol>
-                {props.elem.znaczenia.map(znaczenie => <li key={znaczenie.id_znaczenia}>{znaczenie.definicja}</li>)}
+                {props.elem.znaczenia.map(znaczenie =>
+                    <li key={znaczenie.id_znaczenia}>
+                        <div>{znaczenie.definicja}</div>
+                        {cytaty[znaczenie.id_znaczenia] ?
+                            <div><i>{cytaty[znaczenie.id_znaczenia]}</i></div> : <></>}
+                    </li>)}
             </ol>
         </>
     }
     return <></>
 }
-
 
 export { SXVII, sXVIIsource }
