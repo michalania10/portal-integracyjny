@@ -6,11 +6,13 @@ import { updatedState } from "./components/FetchInfo";
 import { Inputs, initInputState } from './components/Inputs'
 import { Translation, TranslationPl } from './components/TranslationPl';
 import { Korba, korbaSource } from './components/Korba';
-import { SXVII, sXVIIsource } from './components/SVXII'
+import { SXVII, sXVIIsource } from './components/SVXII';
+import { CBDU, cbduSource } from "./components/CBDU";
 
 const translation = new Translation(TranslationPl);
 const korba = korbaSource()
 const sXVII = sXVIIsource()
+const cbdu = cbduSource()
 
 class App extends React.Component {
     constructor(props) {
@@ -21,9 +23,8 @@ class App extends React.Component {
         let allSources = {}
         allSources[korba.key()] = korba
         allSources[sXVII.key()] = sXVII
+        allSources[cbdu.key()] = cbdu
         // {
-        //     sXVII: null,
-        //     cbdu: null,
         //     kartoteka: null
         // }
         const allSearchTypes = ['orth', 'base']
@@ -56,30 +57,21 @@ class App extends React.Component {
                         allSearchTypes={this.state.allSearchTypes}
                         handleInputState={this.handleInputState}
                         handleSourceData={this.handleSourceData} />
-                <ConditionalKorba translation={this.state.translation} sourceData={this.state.sourceData}/>
-                <ConditionalSXVII translation={this.state.translation} sourceData={this.state.sourceData}/>
+                <Conditional translation={this.state.translation} sourceData={this.state.sourceData}
+                             fun={Korba} source={korba} />
+                <Conditional translation={this.state.translation} sourceData={this.state.sourceData}
+                             fun={SXVII} source={sXVII} />
+                <Conditional translation={this.state.translation} sourceData={this.state.sourceData}
+                             fun={CBDU} source={cbdu} />
         </div>
     );
   }
 }
 
-function ConditionalKorba(props) {
-    return (props.sourceData && props.sourceData[korba.key()]) ?
-        <>
-            <hr />
-            <Korba { ...props.sourceData[korba.key()]}
-                   translation={props.translation}/>
-        </>
-        : <></>
-}
-
-function ConditionalSXVII(props) {
-    return (props.sourceData && props.sourceData[sXVII.key()]) ?
-        <>
-            <hr />
-            <SXVII { ...props.sourceData[sXVII.key()]} translation={props.translation}/>
-        </>
-        : <></>
+function Conditional(props) {
+    if (!props.sourceData || !props.sourceData[props.source.key()])
+        return <></>
+    return props.fun({...props.sourceData[props.source.key()], translation: props.translation})
 }
 
 export default App;
