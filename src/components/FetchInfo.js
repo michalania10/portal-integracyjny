@@ -17,6 +17,19 @@ function fetchAndParse(url) {
     return window.fetch(url)
         .then(res => res.json())
         .then(response => {
+                console.log("Fetching response", url, response)
+                return FetchState.ok(url, response)
+            },
+            error => {
+                console.log("Fetching error", url, error)
+                return FetchState.error(url, error)
+            });
+}
+
+function fetchAndOtherParse(url, parse) {
+    return window.fetch(url)
+        .then(parse)
+        .then(response => {
                 console.log("Fetching response", url, response);
                 return FetchState.ok(url, response);
             },
@@ -58,4 +71,4 @@ function updatedState(oldState, fields, valueMapping) {
     return updatedStateRec(oldState, fields, 0, mapping)
 }
 
-export { FetchInfo, FetchState, fetchAndParse, updatedState }
+export { FetchInfo, FetchState, fetchAndParse, fetchAndOtherParse, updatedState }
