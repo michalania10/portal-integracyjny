@@ -55,3 +55,4 @@
 - https://cbdu.ijp.pan.pl/cgi/search/simple?q=książę
 
 # Kartoteka
+- https://rcin.org.pl/dlibra/publication/20029#structure

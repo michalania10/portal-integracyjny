@@ -8,11 +8,13 @@ import { Translation, TranslationPl } from './components/TranslationPl';
 import { Korba, korbaSource } from './components/Korba';
 import { SXVII, sXVIIsource } from './components/SVXII';
 import { CBDU, cbduSource } from "./components/CBDU";
+import { Kartoteka, kartotekaSource } from "./components/Kartoteka";
 
 const translation = new Translation(TranslationPl);
 const korba = korbaSource()
 const sXVII = sXVIIsource()
 const cbdu = cbduSource()
+const kartoteka = kartotekaSource()
 
 class App extends React.Component {
     constructor(props) {
@@ -24,6 +26,7 @@ class App extends React.Component {
         allSources[korba.key()] = korba
         allSources[sXVII.key()] = sXVII
         allSources[cbdu.key()] = cbdu
+        allSources[kartoteka.key()] = kartoteka
         // {
         //     kartoteka: null
         // }
@@ -63,6 +66,8 @@ class App extends React.Component {
                              fun={SXVII} source={sXVII} />
                 <Conditional translation={this.state.translation} sourceData={this.state.sourceData}
                              fun={CBDU} source={cbdu} />
+                <Conditional translation={this.state.translation} sourceData={this.state.sourceData}
+                             fun={Kartoteka} source={kartoteka} />
         </div>
     );
   }
