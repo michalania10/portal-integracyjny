@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# Korba
+- Api
+  - https://korba.edu.pl/api/get_forms_for_query/{URL-encoded zapytanie CQL do korpusu}
+    np. http:korba.edu.pl/api/get_forms_for_query/%5Borth%3D%22Ludzie%22%5D
+    które zwraca listę pasujących form wraz z ich tagsetem i liczbą wystąpień, np.:
+    {"forms": [{"frequency": 446, "orth": "Ludzie", "tag": "subst:pl:nom:manim1"}, {"frequency": 14, "orth": "Ludzie", "tag": "subst:pl:nom:manim2"}, {"frequency": 9, "orth": "Ludzie", "tag": "subst:pl:acc:manim2"}, {"frequency": 4, "orth": "Ludzie", "tag": "subst:pl:voc:manim1"}, {"frequency": 1, "orth": "Ludzie", "tag": "subst:pl:voc:manim2"}]}
+  - https://korba.edu.pl/api/get_quotes/{URL-encoded zapytanie CQL do korpusu}
+    np. https://korba.edu.pl/api/get_quotes/%5Bbase%3D%22szko%C5%82a%22%5D
+    które zwraca dopasowane fragmenty korpusu
+- [ ] oprócz tagu morfosyntaktycznego chcemy podać bardziej “ludzką” charakterystykę gramatyczną. 
+      Być może da się wyciągnąć mapowanie z API. Jeśli nie - będziemy szukać.
+- [x] cytaty wyświetlają się w transkrypcji, a powinny być w transliteracji
+- [x] wyświetla się pierwsze 5 przykładów, ale lepiej by było, gdyby były bardziej losowe;
+      ustaliliśmy, że mają być przykłady dla różnych tagów, wtedy jest szansa,
+      że będą z różnych źródeł
+  - na razie z przykładów, które mam wybieram te z najbardziej różnych dokumentów
+  - poprosiłem Mateusza Żółtaka o instrukcje jak dostać więcej przykładów za jednym razem
+    skierował mnie do Zbigniewa Gawłowicza (napisałem), 
+    który skierował mnie do dra Łukasza Kobylińskiego po dostęp - trzeba by było wystawić albo
+    zmienić endpoint w serwerze korby
+  - patrz niżej
+- [x] liczba zwracanych przykładów to w tej chwili 10, ale może można zwiększyć to w ustawieniach APi,
+  wtedy wybór będzie większy
+  - no nie mozna
+  - Mateusz nie wie, Zbigniew również nie wie
+  - ** kogo mam o to spytać?**
+- [x] przy cytatach nie da się wyświetlić roku - nie jest dostępny przez API
+- [ ] wielkość liter przy przeszukiwaniu po formach: domyślnie nie uwzględniamy
+  ale będzie przycisk “uwzględnij wielkość liter”
+- [ ] pytanie: czy dla wyszukiwania po formie da się i warto dać link do słownika i do Kartoteki?  
+  Czy wygląd ma być taki sam, jak dla przeszukiwania słownika, czy skrócony
+  (Ola: może raczej skrócony)
+  - Raczej wybór źródeł zrobię tak, żeby przy wyborze formy przeszukiwanie słownika było po lemacie
+    wziętym z korby
+  
+# Słownik XVII wieku
+- Api
+  - https://xvii-wiek.ijp.pan.pl/ajax/json.php, który przyjmuje dwa parametry:
+    - hasło - wyrażenie regularne opisujące wyszukiwaną formę hasłową
+    - elementy - opcjonalna lista umożliwiająca ograniczenie ilości zwracanej informacji
+      (pełen opis hasła SXVII jest szalenie rozbudowany).
+      Możliwe elementy to formy/fleksja/etymologia/slowniki/cytaty/znaczenia/zwiazki/podhasla.
+      Jeśli nie podano tego parametru, zwracane są wszystkie.
+      Jeśli ma być zwróconych kilka elementów, należy je wymienić po przecinku.
+      Warto wspomnieć, że ograniczenie liczby elementów znacznie przyspiesza
+      czas przygotowywania odpowiedzi API.
+      np. https://xvii-wiek.ijp.pan.pl/ajax/json.php?haslo=^szkoła$&elementy=znaczenia,formy
+- [x] Słownik - wyświetlanie wyników mniej więcej tak jak w KorBie, ale wraz z cytatem (cytatami)
+- [x] najlepiej pierwszy cytat dla każdego znaczenia (jeśli się da) 
+- [x] czy da się umożliwić kliknięcie w kolejne znaczenie
+  i przekierowanie od razu do tego znaczenia w Słowniku (rozwiniętego)
+    - nie da sie 
+- [ ] Są znaczki, które oznaczają sposób wyświetlania:
+    - ®kursywa®
+    - #wyzielenienie#
+    - Te znaczki mają się nie wyświetlać
+- [ ] Jeśli nie ma to chciałbym (ja Michał) wyświetlać szufladę przed i szufladę po
+# Dwujęzyczny serwis
+- [ ] Wersja angielska
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Centralna bibliteka druków ulotnych
+- https://cbdu.ijp.pan.pl/cgi/search/simple?q=książę
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Kartoteka
+- https://rcin.org.pl/dlibra/publication/20029#structure
