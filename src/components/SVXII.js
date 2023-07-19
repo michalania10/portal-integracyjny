@@ -65,13 +65,13 @@ function buildCytatyMap(cytaty) {
     const map = {}
     if (cytaty)
         for (const cytat of cytaty)
-            if (cytat.typ == "znaczenia" && cytat.id_znaczenia)
+            if (cytat.typ === "znaczenia" && cytat.id_znaczenia)
                 map[cytat.id_znaczenia] = cytat.cytat
     return map
 }
 
 function SXVIIElemZnaczenia(props) {
-    if (props.elem.znaczenia && ! props.elem.znaczenia.length == 0) {
+    if (props.elem.znaczenia && props.elem.znaczenia.length !== 0) {
         const cytaty = buildCytatyMap(props.elem.cytaty)
         return <>
             <div><strong>{props.translation.get("sXVII.znaczenia")}</strong></div>

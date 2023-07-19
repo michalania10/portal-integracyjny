@@ -1,6 +1,6 @@
 import React from 'react';
 import Source from './Source'
-import {FetchInfo, FetchState, fetchAndOtherParse, updatedState, fetchAndParse} from "./FetchInfo";
+import {FetchInfo, FetchState, updatedState} from "./FetchInfo";
 import cbduJsonSample from './CBDU_json_sample'
 
 const cbduAddress = "https://cbdu.ijp.pan.pl/"
@@ -13,9 +13,9 @@ function searchUrl(form) {
         encodeURIComponent("0|1|-date/creators_name/title|archive|-|q::ALL:IN:" + form + "|-|")
 }
 
-function parseResult(result) {
-    return "I m parsing result: " + result
-}
+// function parseResult(result) {
+//     return "I m parsing result: " + result
+// }
 
 function cbduFetchData(stateLogic) {
     let inputState = stateLogic.input()

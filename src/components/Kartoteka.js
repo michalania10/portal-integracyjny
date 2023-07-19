@@ -121,8 +121,8 @@ class Mapping {
     compareString(searchParam) {
         if (this.lastMatch.startsWith(searchParam) ||
             this.firstMatch.startsWith(searchParam)) return 0
-        if (this.firstMatch.localeCompare(searchParam, "pl") == 1) return -1
-        if (this.lastMatch.localeCompare(searchParam, "pl") == -1) return 1
+        if (this.firstMatch.localeCompare(searchParam, "pl") === 1) return -1
+        if (this.lastMatch.localeCompare(searchParam, "pl") === -1) return 1
         return 0
     }
 }

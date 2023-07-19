@@ -20,19 +20,19 @@ function allValidSources(allSources, searchType) {
     return validSources(allSources, searchType, allSources)
 }
 
-function validState(allSources, allSearchTypes, inputState) {
-    const defaultState = initInputState(allSources)
-    if (!inputState)
-        return defaultState;
-    let resultState = {
-        query: inputState.query ? inputState.query : defaultState.query,
-        searchType: (inputState.searchType && allSearchTypes[inputState.searchType]) ? inputState.searchType : defaultState.searchType,
-    }
-    let resultSources = validSources(allSources, resultState.searchType, inputState.sources)
-    resultState.sources = (Object.values(resultSources).filter(x => x).length === 0) ?
-        allValidSources(allSources, resultState.searchType) : resultSources
-    return resultState
-}
+// function validState(allSources, allSearchTypes, inputState) {
+//     const defaultState = initInputState(allSources)
+//     if (!inputState)
+//         return defaultState;
+//     let resultState = {
+//         query: inputState.query ? inputState.query : defaultState.query,
+//         searchType: (inputState.searchType && allSearchTypes[inputState.searchType]) ? inputState.searchType : defaultState.searchType,
+//     }
+//     let resultSources = validSources(allSources, resultState.searchType, inputState.sources)
+//     resultState.sources = (Object.values(resultSources).filter(x => x).length === 0) ?
+//         allValidSources(allSources, resultState.searchType) : resultSources
+//     return resultState
+// }
 
 class Inputs extends React.Component {
     constructor(props) {
