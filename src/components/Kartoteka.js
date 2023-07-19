@@ -22,6 +22,15 @@ class KartotekaMappings {
                     this.skroty = m
             }
         }
+
+        for (let i = 0; i < this.mappings.length - 1; i++) {
+            let m = this.mappings[i]
+            if (!m.lastMatch) m.lastMatch = this.mappings[i + 1].firstMatch
+        }
+
+        let lastM = this.mappings[this.mappings.length - 1]
+        if (lastM.lastMatch) lastM.lastMatch = "żżżżżżżżżżżżżżżż";
+
         console.log("KartotekaMappings", this)
     }
 
@@ -105,10 +114,6 @@ class Mapping {
             })
         if (boundaries.length > 0) this.firstMatch = boundaries[0]
         if (boundaries.length > 1) this.lastMatch = boundaries[1]
-        if (divided.length > 0) this.firstWord = divided[0]
-        if (divided.length > 1) this.lastWord = divided[1]
-        if (this.firstMatch && !this.lastMatch) this.lastMatch = this.firstMatch
-        if (this.firstWord && !this.lastWord) this.lastWord = this.firstWord
     }
 
     compareString(searchParam) {

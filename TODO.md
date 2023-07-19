@@ -10,7 +10,7 @@
 - [ ] oprócz tagu morfosyntaktycznego chcemy podać bardziej “ludzką” charakterystykę gramatyczną. 
       Być może da się wyciągnąć mapowanie z API. Jeśli nie - będziemy szukać.
 - [x] cytaty wyświetlają się w transkrypcji, a powinny być w transliteracji
-- [ ] wyświetla się pierwsze 5 przykładów, ale lepiej by było, gdyby były bardziej losowe;
+- [x] wyświetla się pierwsze 5 przykładów, ale lepiej by było, gdyby były bardziej losowe;
       ustaliliśmy, że mają być przykłady dla różnych tagów, wtedy jest szansa,
       że będą z różnych źródeł
   - na razie z przykładów, które mam wybieram te z najbardziej różnych dokumentów
@@ -18,10 +18,12 @@
     skierował mnie do Zbigniewa Gawłowicza (napisałem), 
     który skierował mnie do dra Łukasza Kobylińskiego po dostęp - trzeba by było wystawić albo
     zmienić endpoint w serwerze korby
-- [ ] liczba zwracanych przykładów to w tej chwili 10, ale może można zwiększyć to w ustawieniach APi,
+  - patrz niżej
+- [x] liczba zwracanych przykładów to w tej chwili 10, ale może można zwiększyć to w ustawieniach APi,
   wtedy wybór będzie większy
   - no nie mozna
-  - ** kogo mam o to spytać?**  
+  - Mateusz nie wie, Zbigniew również nie wie
+  - ** kogo mam o to spytać?**
 - [x] przy cytatach nie da się wyświetlić roku - nie jest dostępny przez API
 - [ ] wielkość liter przy przeszukiwaniu po formach: domyślnie nie uwzględniamy
   ale będzie przycisk “uwzględnij wielkość liter”
@@ -45,9 +47,14 @@
       np. https://xvii-wiek.ijp.pan.pl/ajax/json.php?haslo=^szkoła$&elementy=znaczenia,formy
 - [x] Słownik - wyświetlanie wyników mniej więcej tak jak w KorBie, ale wraz z cytatem (cytatami)
 - [x] najlepiej pierwszy cytat dla każdego znaczenia (jeśli się da) 
-- [ ] czy da się umożliwić kliknięcie w kolejne znaczenie
+- [x] czy da się umożliwić kliknięcie w kolejne znaczenie
   i przekierowanie od razu do tego znaczenia w Słowniku (rozwiniętego)
     - nie da sie 
+- [ ] Są znaczki, które oznaczają sposób wyświetlania:
+    - ®kursywa®
+    - #wyzielenienie#
+    - Te znaczki mają się nie wyświetlać
+- [ ] Jeśli nie ma to chciałbym (ja Michał) wyświetlać szufladę przed i szufladę po
 # Dwujęzyczny serwis
 - [ ] Wersja angielska
 
