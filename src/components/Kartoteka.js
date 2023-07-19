@@ -28,8 +28,10 @@ class KartotekaMappings {
             if (!m.lastMatch) m.lastMatch = this.mappings[i + 1].firstMatch
         }
 
-        let lastM = this.mappings[this.mappings.length - 1]
-        if (lastM.lastMatch) lastM.lastMatch = "żżżżżżżżżżżżżżżż";
+        if (this.mappings.length > 0) {
+            let lastM = this.mappings[this.mappings.length - 1]
+            if (lastM.lastMatch) lastM.lastMatch = "żżżżżżżżżżżżżżżż";
+        }
 
         console.log("KartotekaMappings", this)
     }
