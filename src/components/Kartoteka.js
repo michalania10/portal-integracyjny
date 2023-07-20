@@ -3,7 +3,7 @@ import Source from "./Source";
 import { updatedState} from "./FetchInfo";
 
 let kartotekaIndexUrl = "https://rcin.org.pl/dlibra/publication/20029#structure"
-let kartotekaLocalUrl = "/kartotekaIndex.html"
+let kartotekaLocalUrl = "kartotekaIndex.html"
 
 class KartotekaMappings {
     constructor(links) {
