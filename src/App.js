@@ -61,7 +61,7 @@ class App extends React.Component {
                         handleInputState={this.handleInputState}
                         handleSourceData={this.handleSourceData} />
                 <Conditional translation={this.state.translation} sourceData={this.state.sourceData}
-                             fun={Korba} source={korba} />
+                             fun={Korba} source={korba} inputState={this.state.inputState}/>
                 <Conditional translation={this.state.translation} sourceData={this.state.sourceData}
                              fun={SXVII} source={sXVII} />
                 <Conditional translation={this.state.translation} sourceData={this.state.sourceData}
@@ -74,8 +74,9 @@ class App extends React.Component {
 }
 
 function Conditional(props) {
-    if (!props.sourceData || !props.sourceData[props.source.key()])
-        return <></>
+    if (!props.sourceData || !props.sourceData[props.source.key()] ||
+        !props.inputState || !props.inputState.query || props.inputState.query === "")
+            return <></>
     return props.fun({...props.sourceData[props.source.key()], translation: props.translation})
 }
 
