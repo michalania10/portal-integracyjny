@@ -86,14 +86,14 @@ class Inputs extends React.Component {
             </label>
             <input name="q" id="inputs.query"
                    onChange={event => this.updateState("query", event.target.value)}
-                   defaultValue={this.state.query}/>
+                   value={this.state.query}/>
 
             <label htmlFor="inputs.searchType">
                 {this.props.translation.get("inputs.searchType")}
             </label>
             <select name="t" id="inputs.searchType"
                     onChange={event => this.updateSearchType(event.target.value)}
-                    defaultValue={this.state.searchType}>
+                    value={this.state.searchType}>
                 {
                     this.props.allSearchTypes.map(searchType =>
                         <option key={searchType} value={searchType}>
@@ -112,7 +112,7 @@ class Inputs extends React.Component {
                     return (<div key={id}>
                         <input type="checkbox" name={id} id={id}
                                disabled={!allowed}
-                               defaultChecked={checked}
+                               checked={checked}
                                onChange={event => this.updateSourceSelection(id, event.target.checked)} />
                         <label htmlFor={id}>{this.props.translation.get(id)}</label>
                     </div>)})
