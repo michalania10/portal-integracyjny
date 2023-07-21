@@ -13,6 +13,8 @@ const TranslationPl = {
   "korba.rightCtx": "Prawy kontekst",
   "korba.documentKey": "Skrót tekstu",
   "korba.link": "Wyniki z korpusu barokowego",
+  "korba.forms.header": "Wyniki z podziałem na części mowy i formy gramatyczne",
+  "korba.quotes.header": "Przykładowe wyniki z korpusu",
   "sXVII": "Słownik XVII wieku",
   "sXVII.link": "Odnośnik do słownika",
   "sXVII.znaczenia": "Znaczenia",

@@ -3,7 +3,16 @@
   - https://korba.edu.pl/api/get_forms_for_query/{URL-encoded zapytanie CQL do korpusu}
     np. http:korba.edu.pl/api/get_forms_for_query/%5Borth%3D%22Ludzie%22%5D
     które zwraca listę pasujących form wraz z ich tagsetem i liczbą wystąpień, np.:
-    {"forms": [{"frequency": 446, "orth": "Ludzie", "tag": "subst:pl:nom:manim1"}, {"frequency": 14, "orth": "Ludzie", "tag": "subst:pl:nom:manim2"}, {"frequency": 9, "orth": "Ludzie", "tag": "subst:pl:acc:manim2"}, {"frequency": 4, "orth": "Ludzie", "tag": "subst:pl:voc:manim1"}, {"frequency": 1, "orth": "Ludzie", "tag": "subst:pl:voc:manim2"}]}
+    ```
+    {
+    "forms": [
+      {"frequency": 446, "orth": "Ludzie", "tag": "subst:pl:nom:manim1"},
+      {"frequency": 14, "orth": "Ludzie", "tag": "subst:pl:nom:manim2"},
+      {"frequency": 9, "orth": "Ludzie", "tag": "subst:pl:acc:manim2"},
+      {"frequency": 4, "orth": "Ludzie", "tag": "subst:pl:voc:manim1"},
+      {"frequency": 1, "orth": "Ludzie", "tag": "subst:pl:voc:manim2"}]
+    }
+    ```
   - https://korba.edu.pl/api/get_quotes/{URL-encoded zapytanie CQL do korpusu}
     np. https://korba.edu.pl/api/get_quotes/%5Bbase%3D%22szko%C5%82a%22%5D
     które zwraca dopasowane fragmenty korpusu
@@ -21,7 +30,7 @@
   - patrz niżej
 - [x] liczba zwracanych przykładów to w tej chwili 10, ale może można zwiększyć to w ustawieniach APi,
   wtedy wybór będzie większy
-  - no nie mozna
+  - no nie można
   - Mateusz nie wie, Zbigniew również nie wie
   - ** kogo mam o to spytać?**
 - [x] przy cytatach nie da się wyświetlić roku - nie jest dostępny przez API
@@ -32,7 +41,20 @@
   (Ola: może raczej skrócony)
   - Raczej wybór źródeł zrobię tak, żeby przy wyborze formy przeszukiwanie słownika było po lemacie
     wziętym z korby
-  
+- [ ] Zmiany 2023-07-20
+  - [x] Nagłówki dla poszczególnych sesji wyników, czyli:
+    - [x] przed “Forma Znacznik morfosytnaktyczny Wystąpienia”: “Wyniki z podziałem na części mowy i formy gramatyczne:”
+    - [x] przed “Lewy kontekst Rezultat Prawy kontekst Skrót tekstu”: “Przykładowe wyniki z korpusu:”
+  - [x] link do korpusu przy poszczególnych formach:
+    ```
+    [orth=”ta_konkretna_forma_z_danego_wiersza” & tag=”....”]
+    ```
+  - [ ] ludzka charakterystyka gramatyczna zamiast tagu na liście form
+  - [x] skrót do tekstu przy cytatach: bez “KORBA_”
+  - [x] przy wyświetlaniu form z KorBy prosimy spłaszczyć wielkie/małe litery na małe
+  - [x] w przykładowych wynikach z korpusu między wynikiem a tagiem brakuje spacji
+  - [ ] liczba wystąpień: wyrównanie do prawej
+  - [x] na samej górze po liczbie wystąpień a przed linkiem brakuje spacji
 # Słownik XVII wieku
 - Api
   - https://xvii-wiek.ijp.pan.pl/ajax/json.php, który przyjmuje dwa parametry:
@@ -54,12 +76,25 @@
     - ®kursywa®
     - #wyzielenienie#
     - Te znaczki mają się nie wyświetlać
-- [ ] Jeśli nie ma to chciałbym (ja Michał) wyświetlać szufladę przed i szufladę po
+- [ ] Zmiany 2023-07-20
+  - [ ] Przy wynikach z e-SXVII prosimy o link do hasła (może być tak jak w KorBie)
+  - [ ] Przy wynikach z e-SXVII przed wyrazem “Znaczenia” (we wcześniejszym akapicie, z numerem porządkowym)
+    prosimy o podanie główki hasła wraz z ewentualną informacją, że jest to podhasło i ewentualnym numerem homonimu,
+    czyli np. “BRAMA (podhasło)”, “BRAMA I”
+  - [ ] jeśli hasło jest “zalążkiem” lub “hasłem w opracowaniu”, to prosimy o umieszczenie tej informacji przy główce hasła
+  - [ ] definicje prosimy podawać w łapkach, np. “»państwo tureckie, historycznie nazywane Portą Otomańską«”
+  - [ ] W przypadku braku definicji w e-SXVII powinna być informacja: “hasło w opracowaniu - nie podano jeszcze definicji”
+
 # Dwujęzyczny serwis
 - [ ] Wersja angielska
 
 # Centralna bibliteka druków ulotnych
 - https://cbdu.ijp.pan.pl/cgi/search/simple?q=książę
+- [ ] Zmiany 2023-07-20
+  - [ ] (o ile się da) przeszukiwanie tylko w polu “transkrypcja”
+    (teraz to pole nazywa się “tłumaczenie”, nie wiem, czy się da zmienić nazwę na “transkrypcja”)
 
 # Kartoteka
 - https://rcin.org.pl/dlibra/publication/20029#structure
+- [ ] Jeśli nie ma to chciałbym (ja Michał) wyświetlać szufladę przed i szufladę po
+

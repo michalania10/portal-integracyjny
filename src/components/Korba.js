@@ -51,8 +51,10 @@ function queryPart(attr, value) {
     return  attr + "=\"" + escapeQuotes(value) + "\""
 }
 
-function quotesQuery(formsPart, tag) {
-    return "[" + formsPart + " & " + queryPart("tag", tag) + "]"
+function quotesQuery(orths, tag) {
+    let escapedOrths = orths.map(orth => escapeQuotes(orth))
+    let joinedOrths = escapedOrths.join("|")
+    return "[" + queryPart("orth", joinedOrths) + " & " + queryPart("tag", tag) + "]"
 }
 
 function Korba(props) {
@@ -65,9 +67,12 @@ function Korba(props) {
             <FetchInfo {...props.formsFetch} translation={props.translation} />
     const quotes = props.quotesFetch.result ? props.quotesFetch.result.quotes : []
     const quotesElem = (forms.length === 0) ? <></> :
-        (props.quotesFetch.result ? <KorbaQuotes quotes={quotes} translation={props.translation} /> :
-            <FetchInfo {...props.quotesFetch} translation={props.translation} />)
-
+        <>
+            <h4>{props.translation.get("korba.quotes.header")}</h4>
+            {(props.quotesFetch.result ?
+                <KorbaQuotes quotes={quotes} translation={props.translation} /> :
+                <FetchInfo {...props.quotesFetch} translation={props.translation} />)}
+        </>
     return <div>
                 <h3>{props.translation.get("korba")}</h3>
                 {formsElem}
@@ -81,25 +86,45 @@ function KorbaForms(props) {
     const sumResults = props.forms.map(form => form.frequency)
         .reduce((sum, current) => sum + current, 0)
 
-    const formsWithLinks = props.forms.map(form => {
+    const lowerFormsMap = {}
+    props.forms.forEach(form => {
+        let lowerOrth = form.orth.toLocaleLowerCase("pl")
+        let key = lowerOrth + ":" + form.tag
+        let old = lowerFormsMap[key]
+        if (!old) {
+            lowerFormsMap[key] = {
+                orth: form.orth,
+                key: key,
+                orths: [form.orth],
+                tag: form.tag,
+                frequency: form.frequency
+            }
+        } else {
+            old.orths[old.orths.length] = form.orth
+            old.frequency += form.frequency
+            old.orth = lowerOrth
+        }
+    })
+    const withLinks = Object.values(lowerFormsMap).map(lower => {
         return {
-            ...form,
-            key: form.orth + ":" + form.tag,
-            link: (<a href={korbaLink(quotesQuery(props.formsQueryPart, form.tag))} target="blank">
+            ...lower,
+            link: (<a href={korbaLink(quotesQuery(lower.orths, lower.tag))} target="blank">
                 {props.translation.get("korba.link")}
             </a>)
         }
     })
 
-    return <div>
+    return <>
             {props.translation.get("korba.allResults")}: {sumResults}
+            {' '}
             <a href={korbaLink("[" + props.formsQueryPart + "]")} target="blank">
                 {props.translation.get("korba.link")}
             </a>
+            <h4>{props.translation.get("korba.forms.header")}</h4>
             <Table headers={["orth", "tag", "frequency", "link"]}
-                   data={formsWithLinks}
+                   data={withLinks}
                    translation={props.translation}/>
-        </div>
+        </>
 }
 
 function korbaWordToObject(korbaWord) {
@@ -135,8 +160,14 @@ function createRightContext(rightCtx, limit) {
 function KorbaHit(props) {
     return <>
         <strong>{props.hit.orth}</strong>
+        {' '}
         <u>{props.hit.tag}</u>
     </>
+}
+
+function removeKorbaPrefix(documentKey) {
+    let prefixPos = documentKey.indexOf("_")
+    return documentKey.substring(prefixPos + 1) // 0 if there was no underscore
 }
 
 function KorbaQuotes(props) {
@@ -149,13 +180,15 @@ function KorbaQuotes(props) {
                 "korba.leftCtx": createLeftContext(quote.left, ctxLimit),
                 "korba.hit": (<KorbaHit hit={getHit(quote)} />),
                 "korba.rightCtx": createRightContext(quote.right, ctxLimit),
-                "korba.documentKey": quote.documentKey
+                "korba.documentKey": removeKorbaPrefix(quote.documentKey)
             }
         })
 
-    return <Table headers={["korba.leftCtx", "korba.hit", "korba.rightCtx", "korba.documentKey"]}
+    return <>
+            <Table headers={["korba.leftCtx", "korba.hit", "korba.rightCtx", "korba.documentKey"]}
                   data={quotes}
                   translation={props.translation}/>
+        </>
 }
 
 function selectQuotes(quotes, limit) {
