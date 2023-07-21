@@ -33,14 +33,12 @@ class KartotekaMappings {
             if (lastM.lastMatch) lastM.lastMatch = "żżżżżżżżżżżżżżżż";
         }
 
-        console.log("KartotekaMappings", this)
+        // console.log("KartotekaMappings", this)
     }
 
     searchBegin(searchParam, b, e) {
-        console.log("searchBegin", b, e)
         if (b >= e) return e
         let check = Math.floor((b + e) / 2)
-        console.log("searchBegin", check, this.mappings[check])
         let cmp = this.mappings[check].compareString(searchParam)
         if (cmp === -1) return this.searchBegin(searchParam, b, check)
         if (cmp === 1) return this.searchBegin(searchParam,check + 1, e)
@@ -48,10 +46,8 @@ class KartotekaMappings {
     }
 
     searchEnd(searchParam, b, e) {
-        console.log("searchEnd", b, e)
         if (b >= e) return e
         let check = Math.floor((b + e + 1) / 2)
-        console.log("searchEnd", check, this.mappings[check])
         let cmp = this.mappings[check].compareString(searchParam)
         if (cmp === -1) return this.searchEnd(searchParam, b, check - 1)
         if (cmp === 1) return this.searchEnd(searchParam, check, e)
@@ -63,7 +59,6 @@ class KartotekaMappings {
     }
 
     searchString(searchParam) {
-        console.log("searchString", searchParam)
         let b = this.searchBegin(searchParam, 0, this.mappings.length)
         let e = this.searchEnd(searchParam, b, this.mappings.length - 1)
 
@@ -130,8 +125,6 @@ class Mapping {
 function createIndex(page) {
     let divS = page.getElementById("structure")
     let links = divS.getElementsByClassName("tab-content__tree-link")
-    console.log("createIndex links")
-    console.log(links)
     let usedLinks = {}
     usedLinks[kartotekaIndexUrl] = true
 
