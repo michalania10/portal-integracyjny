@@ -31,7 +31,6 @@ function SXVII(props) {
         return <FetchInfo {...props.baseFetch} translation={props.translation} />
 
     return <div>
-        <div><strong>{props.translation.get("sXVII")}</strong></div>
         <ol>
             {props.baseFetch.result.map(elem =>
                 <li key={elem.haslo.id_hasla}>

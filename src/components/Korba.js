@@ -53,7 +53,7 @@ function queryPart(attr, value) {
 
 function quotesQuery(orths, tag) {
     let escapedOrths = orths.map(orth => escapeQuotes(orth))
-    let joinedOrths = escapedOrths.join("|")
+    let joinedOrths = (orths.length > 1) ? ("(" + escapedOrths.join("|") + ")") : escapedOrths[0]
     return "[" + queryPart("orth", joinedOrths) + " & " + queryPart("tag", tag) + "]"
 }
 
@@ -74,7 +74,6 @@ function Korba(props) {
                 <FetchInfo {...props.quotesFetch} translation={props.translation} />)}
         </>
     return <div>
-                <h3>{props.translation.get("korba")}</h3>
                 {formsElem}
                 {quotesElem}
            </div>

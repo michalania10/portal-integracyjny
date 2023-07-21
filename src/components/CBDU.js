@@ -49,7 +49,6 @@ function CBDU(props) {
         return <FetchInfo {...props.formsFetch} translation={props.translation} />
 
     return <div>
-         <div><strong>{props.translation.get("cbdu")}</strong></div>
          <ul>
              {props.formsFetch.result.map(elem =>
                  <li key={elem.eprintid}>

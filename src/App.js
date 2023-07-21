@@ -45,15 +45,11 @@ class App extends React.Component {
     }
 
     handleInputState(inputState) {
-        console.log("handleInputState before", this.state)
         this.setState(oldState => updatedState(oldState, "inputState", inputState))
-        console.log("handleInputState after", this.state)
     }
 
     handleSourceData(mapping) {
-        console.log("handleSourceData before", this.state)
         this.setState(oldState => updatedState(oldState, "sourceData", mapping))
-        console.log("handleSourceData after", this.state)
     }
 
     render() {
@@ -64,17 +60,13 @@ class App extends React.Component {
                         allSearchTypes={this.state.allSearchTypes}
                         handleInputState={this.handleInputState}
                         handleSourceData={this.handleSourceData} />
-                <Conditional translation={this.state.translation}
-                             sourceData={this.state.sourceData} inputState={this.state.inputState}
+                <Conditional translation={this.state.translation} sourceData={this.state.sourceData}
                              fun={Korba} source={korba} />
-                <Conditional translation={this.state.translation}
-                             sourceData={this.state.sourceData} inputState={this.state.inputState}
+                <Conditional translation={this.state.translation} sourceData={this.state.sourceData}
                              fun={SXVII} source={sXVII} />
-                <Conditional translation={this.state.translation}
-                             sourceData={this.state.sourceData} inputState={this.state.inputState}
+                <Conditional translation={this.state.translation} sourceData={this.state.sourceData}
                              fun={CBDU} source={cbdu} />
-                <Conditional translation={this.state.translation}
-                             sourceData={this.state.sourceData} inputState={this.state.inputState}
+                <Conditional translation={this.state.translation} sourceData={this.state.sourceData}
                              fun={Kartoteka} source={kartoteka} />
         </div>
     );
@@ -82,11 +74,13 @@ class App extends React.Component {
 }
 
 function Conditional(props) {
-    if (!props.sourceData || !props.sourceData[props.source.key()] ||
-        !props.inputState || !props.inputState.query) {
+    if (!props.sourceData || !props.sourceData[props.source.key()])
             return <></>
-    }
-    return props.fun({...props.sourceData[props.source.key()], translation: props.translation})
+    return <>
+        <hr/>
+        <h3>{props.translation.get(props.source.key())}</h3>
+        {props.fun({...props.sourceData[props.source.key()], translation: props.translation})}
+    </>
 }
 
 export default App;

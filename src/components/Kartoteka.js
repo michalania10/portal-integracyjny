@@ -182,7 +182,6 @@ function kartotekaSource() {
 function Kartoteka(props) {
     if (!props.searchMatches) return <></>
    return <div>
-       <h3>{props.translation.get("kartoteka")}</h3>
        <ul>
            {
                props.searchMatches.map(mapping =>
