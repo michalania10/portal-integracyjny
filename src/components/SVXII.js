@@ -69,22 +69,32 @@ function buildCytatyMap(cytaty) {
     return map
 }
 
+function SXVIIEmptyZnaczenia(props) {
+    return <div><strong>{props.translation.get("noResults")}</strong></div>
+}
+
 function SXVIIElemZnaczenia(props) {
-    if (props.elem.znaczenia && props.elem.znaczenia.length !== 0) {
-        const cytaty = buildCytatyMap(props.elem.cytaty)
-        return <>
-            <div><strong>{props.translation.get("sXVII.znaczenia")}</strong></div>
-            <ol>
-                {props.elem.znaczenia.map(znaczenie =>
+    if (!props.elem.znaczenia)
+        return <SXVIIEmptyZnaczenia {...props}/>
+    const cytaty = buildCytatyMap(props.elem.cytaty)
+    let withDef = props.elem.znaczenia.filter(znaczenie => znaczenie.definicja &&
+            znaczenie.definicja !== "" &&
+            znaczenie.id_znaczenia &&
+            cytaty[znaczenie.id_znaczenia])
+    if (withDef.length === 0)
+        return <SXVIIEmptyZnaczenia {...props}/>
+    return <>
+        <h4>{props.translation.get("sXVII.znaczenia")}</h4>
+        <ol>
+            {
+                withDef.map(znaczenie =>
                     <li key={znaczenie.id_znaczenia}>
                         <div>{znaczenie.definicja}</div>
-                        {cytaty[znaczenie.id_znaczenia] ?
-                            <div><i>{cytaty[znaczenie.id_znaczenia]}</i></div> : <></>}
-                    </li>)}
-            </ol>
-        </>
-    }
-    return <></>
+                        <div><i>{cytaty[znaczenie.id_znaczenia]}</i></div>
+                    </li>)
+            }
+        </ol>
+    </>
 }
 
 export { SXVII, sXVIIsource }
