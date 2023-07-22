@@ -73,17 +73,17 @@
   i przekierowanie od razu do tego znaczenia w Słowniku (rozwiniętego)
     - nie da sie 
 - [ ] Są znaczki, które oznaczają sposób wyświetlania:
-    - ®kursywa®
-    - #wyzielenienie#
+    - ®kursywa® - język obcy
+    - #wyzielenienie# - formy gramatyczne wyróżnione w cytatach
     - Te znaczki mają się nie wyświetlać
 - [ ] Zmiany 2023-07-20
-  - [ ] Przy wynikach z e-SXVII prosimy o link do hasła (może być tak jak w KorBie)
+  - [x] Przy wynikach z e-SXVII prosimy o link do hasła (może być tak jak w KorBie)
   - [ ] Przy wynikach z e-SXVII przed wyrazem “Znaczenia” (we wcześniejszym akapicie, z numerem porządkowym)
     prosimy o podanie główki hasła wraz z ewentualną informacją, że jest to podhasło i ewentualnym numerem homonimu,
     czyli np. “BRAMA (podhasło)”, “BRAMA I”
-  - [ ] jeśli hasło jest “zalążkiem” lub “hasłem w opracowaniu”, to prosimy o umieszczenie tej informacji przy główce hasła
+  - [x] jeśli hasło jest “zalążkiem” lub “hasłem w opracowaniu”, to prosimy o umieszczenie tej informacji przy główce hasła
   - [ ] definicje prosimy podawać w łapkach, np. “»państwo tureckie, historycznie nazywane Portą Otomańską«”
-  - [ ] W przypadku braku definicji w e-SXVII powinna być informacja: “hasło w opracowaniu - nie podano jeszcze definicji”
+  - [x] W przypadku braku definicji w e-SXVII powinna być informacja: “hasło w opracowaniu - nie podano jeszcze definicji”
 
 # Dwujęzyczny serwis
 - [ ] Wersja angielska

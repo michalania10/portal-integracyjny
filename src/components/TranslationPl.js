@@ -1,24 +1,27 @@
 const TranslationPl = {
-  "inputs.searchType": "Rodzaj wyszukiwania",
-  "inputs.orth": "Forma",
   "inputs.base": "Lemat",
-  "inputs.value": "Zapytanie",
+  "inputs.orth": "Forma",
+  "inputs.query": "Zapytanie",
+  "inputs.searchType": "Rodzaj wyszukiwania",
   "inputs.sources": "Żródła do przeszukania",
   "inputs.submit": "Szukaj",
-  "inputs.query": "Zapytanie",
   "korba": "Korpus barokowy",
   "korba.allResults": "Wystąpienia",
-  "korba.leftCtx": "Lewy kontekst",
-  "korba.hit": "Rezultat",
-  "korba.rightCtx": "Prawy kontekst",
   "korba.documentKey": "Skrót tekstu",
-  "korba.link": "Wyniki z korpusu barokowego",
   "korba.forms.header": "Wyniki z podziałem na części mowy i formy gramatyczne",
+  "korba.hit": "Rezultat",
+  "korba.leftCtx": "Lewy kontekst",
+  "korba.link": "Wyniki z korpusu barokowego",
   "korba.quotes.header": "Przykładowe wyniki z korpusu",
+  "korba.rightCtx": "Prawy kontekst",
   "sXVII": "Słownik XVII wieku",
-  "sXVII.link": "Odnośnik do słownika",
-  "sXVII.znaczenia": "Znaczenia",
   "sXVII.haslo.czm": "Część mowy",
+  "sXVII.haslo.formy": "Inne formy",
+  "sXVII.link": "Odnośnik do słownika",
+  "sXVII.stan_opracowania.zalążek": "zalążek",
+  "sXVII.stan_opracowania.w opracowaniu": "w opracowaniu",
+  "sXVII.znaczenia": "Znaczenia",
+  "sXVII.znaczenia.noResults": "Hasło w opracowaniu - nie podano jeszcze definicji",
   "cbdu": "Cyfrowa Biblioteka Druków Ulotnych",
   "kartoteka": "Kartoteka",
   "loading": "Trwa ściąganie danych",
@@ -27,7 +30,6 @@ const TranslationPl = {
   "tag": "Znacznik morfosyntaktyczny",
   "frequency": "Wystąpienia",
   "link": "Link",
-  "search.byBases": "Po lematach znalezionych w innych źródłach",
   "": ""
 };
 
@@ -38,8 +40,13 @@ class Translation {
   }
 
   get(key) {
-    const value = this.translation[key] ;
-    return value ? value : ("missing translation:" + key);
+    const value = this.translation[key]
+    return value ? value : ("missing translation:" + key)
+  }
+  getOrKey(key, prefix) {
+    const searchKey = prefix ? (prefix + "." + key) : key
+    const value = this.translation[searchKey]
+    return value ? value : key
   }
 }
 
