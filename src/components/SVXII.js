@@ -43,8 +43,13 @@ function SXVII(props) {
 
 function SXVIIElem(props) {
     return <>
-        <SXVIIElemHaslo {...props} />
+        <SXVIIElemHasloHeader {...props} />
+        <SXVIIElemHasloStanOpracowania {...props} />
+        <SXVIIElemHasloSub {...props} />
+        <SXVIIElemHasloFormy {...props} />
+        <div><strong>{props.translation.get("sXVII.haslo.czm")}</strong>: {props.elem.haslo.czm}</div>
         <SXVIIElemZnaczenia {...props} />
+        <SXVIIElemHasloAdditional {...props} />
     </>;
 }
 
@@ -64,8 +69,29 @@ function SXVIIElemHasloHeader(props) {
 }
 
 function SXVIIElemHasloStanOpracowania(props) {
-    let state = props.elem.haslo.stan_opracowania
-    return !state ? <></> : <div>{props.translation.getOrKey(state, "sXVII.stan_opracowania")}</div>
+    const state = props.elem.haslo.stan_opracowania
+    return state ?
+        <div>{props.translation.getOrKey(state, "sXVII.stan_opracowania")}</div> :
+        <></>
+}
+
+function SXVIIElemHasloSub(props) {
+    const parent_id = props.elem.id_nadhasla
+    return parent_id ?
+        <div>
+            <a href={sXVIIlink(parent_id)} target="blank">{props.translation.get("sXVII.parentLink")}</a>
+        </div> :
+        <></>
+}
+
+function SXVIIElemHasloAdditional(props) {
+    const additional = props.elem.haslo.informacje_dodatkowe
+    return additional ?
+        <>
+            <div><strong>{props.translation.get("sXVII.haslo.additional")}</strong></div>
+            <div>{additional}</div>
+        </> :
+        <></>
 }
 
 function SXVIIElemHasloFormy(props) {
@@ -76,18 +102,6 @@ function SXVIIElemHasloFormy(props) {
         {' '}
         {orths.slice(1).map(formOrth).join(", ")}
     </div>
-}
-
-function SXVIIElemHaslo(props) {
-    if (props.elem.formy && props.elem.haslo) {
-        return <>
-            <SXVIIElemHasloHeader {...props} />
-            <SXVIIElemHasloStanOpracowania {...props} />
-            <SXVIIElemHasloFormy {...props} />
-            <div><strong>{props.translation.get("sXVII.haslo.czm")}</strong>: {props.elem.haslo.czm}</div>
-        </>
-    }
-    return <></>
 }
 
 function buildCytatyMap(cytaty) {
@@ -103,24 +117,34 @@ function SXVIIEmptyZnaczenia(props) {
     return <div>{props.translation.get("sXVII.znaczenia.noResults")}</div>
 }
 
+function SXVIIElemZnaczeniaDef(props) {
+    return props.definicja ?
+        <div>»{props.definicja}«</div> :
+        <></>
+}
+
+function SXVIIElemZnaczeniaCytat(props) {
+    if (!props.cytat) return <></>
+    let noHash = props.cytat.split("#").join("")
+    let noRights = noHash.split("®").join("")
+    return <i>{noRights}</i>
+}
+
 function SXVIIElemZnaczenia(props) {
     if (!props.elem.znaczenia)
         return <SXVIIEmptyZnaczenia {...props}/>
-    const cytaty = buildCytatyMap(props.elem.cytaty)
-    let withDef = props.elem.znaczenia.filter(znaczenie => znaczenie.definicja &&
-            znaczenie.definicja !== "" &&
-            znaczenie.id_znaczenia &&
-            cytaty[znaczenie.id_znaczenia])
+    let withDef = props.elem.znaczenia.filter(znaczenie => znaczenie.definicja && znaczenie.definicja !== "")
     if (withDef.length === 0)
         return <SXVIIEmptyZnaczenia {...props}/>
+    const cytaty = buildCytatyMap(props.elem.cytaty)
     return <>
         <div><strong>{props.translation.get("sXVII.znaczenia")}</strong></div>
         <ul>
             {
                 withDef.map(znaczenie =>
                     <li key={znaczenie.id_znaczenia}>
-                        <div>{znaczenie.definicja}</div>
-                        <div><i>{cytaty[znaczenie.id_znaczenia]}</i></div>
+                        <SXVIIElemZnaczeniaDef definicja={znaczenie.definicja} />
+                        <SXVIIElemZnaczeniaCytat cytat={cytaty[znaczenie.id_znaczenia]} />
                     </li>)
             }
         </ul>
