@@ -86,7 +86,9 @@
   - [x] W przypadku braku definicji w e-SXVII powinna być informacja: “hasło w opracowaniu - nie podano jeszcze definicji”
 
 # Dwujęzyczny serwis
-- [ ] Wersja angielska
+- [x] Wersja angielska
+  - Ze strony słownika skopiowałem flagi języków (polski i angielski), zakładam, że mogę to zrobić bo należą do zakładu
+  - [ ] Trzeba sprawdzić brakujące tłumaczenia: *kartoteka*
 - [ ] Instrukcja obsługi
 
 # Centralna bibliteka druków ulotnych

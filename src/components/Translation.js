@@ -1,4 +1,9 @@
-const TranslationPl = {
+import React from 'react';
+
+
+const translationCodeParam = "lang"
+
+const TranslationPlData = {
   "inputs.base": "Lemat",
   "inputs.orth": "Forma",
   "inputs.query": "Zapytanie",
@@ -34,10 +39,11 @@ const TranslationPl = {
   "tag": "Znacznik morfosyntaktyczny",
   "frequency": "Wystąpienia",
   "link": "Link",
-  "": ""
+  "": "",
+  "translationCodeParam": ""
 }
 
-const TranslationEng = {
+const TranslationEnData = {
   "inputs.base": "Lemma",
   "inputs.orth": "Form",
   "inputs.query": "Query",
@@ -73,7 +79,8 @@ const TranslationEng = {
   "tag": "Morphosyntactic tag",
   "frequency": "Frequency",
   "link": "Link",
-  "": ""
+  "": "",
+  "translationCodeParam": translationCodeParam + "=en"
 }
 
 class Translation {
@@ -90,6 +97,37 @@ class Translation {
     const value = this.translation[searchKey]
     return value ? value : key
   }
+
+  queryParam() {
+    let param = this.translation["translationCodeParam"]
+    return param ? param : ""
+  }
 }
 
-export { Translation, TranslationPl };
+const TranslationPl = new Translation(TranslationPlData)
+const TranslationEn = new Translation(TranslationEnData)
+
+function initTranslation() {
+  let translationCode = new URLSearchParams(window.location.search).get(translationCodeParam)
+  if (translationCode === "en") return TranslationEn
+  return TranslationPl
+}
+
+function TranslationSelect(props) {
+  return <div class="translation-select">
+      <div class="header-pl">
+        <img alt="Wersja polska"
+             title="Wersja polska"
+             src="pl.png"
+             onClick={event => props.handleTranslation(TranslationPl)} />
+      </div>
+      <div className="header-en">
+        <img alt="English version"
+            title="English version"
+            src="en.png"
+            onClick={event => props.handleTranslation(TranslationEn)} />
+      </div>
+  </div>
+}
+
+export { initTranslation, TranslationSelect };

@@ -3,14 +3,13 @@
 
 import React from 'react';
 import { updatedState } from "./components/FetchInfo";
-import { Inputs, initInputState } from './components/Inputs'
-import { Translation, TranslationPl } from './components/Translation';
+import { Inputs } from './components/Inputs'
+import { initTranslation, TranslationSelect } from './components/Translation';
 import { Korba, korbaSource } from './components/Korba';
 import { SXVII, sXVIIsource } from './components/SVXII';
 import { CBDU, cbduSource } from "./components/CBDU";
 import { Kartoteka, kartotekaSource } from "./components/Kartoteka";
 
-const translation = new Translation(TranslationPl);
 const korba = korbaSource()
 const sXVII = sXVIIsource()
 const cbdu = cbduSource()
@@ -21,27 +20,29 @@ class App extends React.Component {
         super(props);
         this.handleInputState = this.handleInputState.bind(this)
         this.handleSourceData = this.handleSourceData.bind(this)
+        this.handleTranslation = this.handleTranslation.bind(this)
 
         let allSources = {}
         allSources[korba.key()] = korba
         allSources[sXVII.key()] = sXVII
         allSources[cbdu.key()] = cbdu
         allSources[kartoteka.key()] = kartoteka
-        // {
-        //     kartoteka: null
-        // }
         const allSearchTypes = ['orth', 'base']
         this.state = this.initState(allSources, allSearchTypes)
     }
 
     initState(allSources, allSearchTypes) {
         return {
-            inputState: initInputState(allSources),
-            translation: translation,
+            inputState: {},
+            translation: initTranslation(),
             allSources,
             allSearchTypes,
             sourceData: {}
         }
+    }
+
+    handleTranslation(translation) {
+        this.setState(oldState => updatedState(oldState, "translation", translation))
     }
 
     handleInputState(inputState) {
@@ -54,6 +55,7 @@ class App extends React.Component {
 
     render() {
         return <div>
+                <TranslationSelect handleTranslation={this.handleTranslation} />
                 <Inputs translation={this.state.translation}
                         allSources={this.state.allSources}
                         allSearchTypes={this.state.allSearchTypes}
@@ -75,7 +77,10 @@ class App extends React.Component {
 function QueryLink(props) {
     if (!props.inputState || !props.inputState.queryLink || props.inputState.queryLink === "")
         return <></>
-    return <div><a href={props.inputState.queryLink}>{props.translation.get("inputs.queryLink")}</a></div>
+    let translationParam = props.translation.queryParam()
+    if (translationParam !== "") translationParam = translationParam + "&"
+    let queryLink = "?" + translationParam + props.inputState.queryLink
+    return <div><a href={queryLink}>{props.translation.get("inputs.queryLink")}</a></div>
 }
 
 function Conditional(props) {

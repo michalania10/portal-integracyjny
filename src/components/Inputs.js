@@ -54,8 +54,7 @@ function inputState2url(inputState) {
     let sources = Object.entries(inputState.sources)
         .filter(pair => pair[1])
         .map(pair => sourceParamName + "=" + pair[0]).join("&")
-    return "?" +
-        queryParamName + "=" + encodeURIComponent(inputState.query) + "&" +
+    return queryParamName + "=" + encodeURIComponent(inputState.query) + "&" +
         searchTypeParamName + "=" + inputState.searchType +
         (sources === "" ? "" : ("&" + sources))
 }
@@ -103,7 +102,11 @@ class Inputs extends React.Component {
     performSearch() {
         let inputState = this.prepareResult()
         if (!inputState.query || inputState.query === "") return
-        inputState.queryLink = inputState2url(inputState)
+        let newQueryLink = inputState2url(inputState)
+        if (inputState.queryLink === newQueryLink) return
+        this.updateState("queryLink", newQueryLink)
+
+        inputState.queryLink = newQueryLink
 
         this.handleInputState(inputState)
         this.handleSourceData({})
@@ -162,4 +165,4 @@ class Inputs extends React.Component {
     }
 }
 
-export { Inputs, initInputState };
+export { Inputs };
