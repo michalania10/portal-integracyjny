@@ -5,6 +5,7 @@ const TranslationPl = {
   "inputs.searchType": "Rodzaj wyszukiwania",
   "inputs.sources": "Żródła do przeszukania",
   "inputs.submit": "Szukaj",
+  "inputs.queryLink": "Link do bierzącego wyszukiwania",
   "korba": "Korpus barokowy",
   "korba.allResults": "Wystąpienia",
   "korba.documentKey": "Skrót tekstu",

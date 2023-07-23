@@ -87,6 +87,7 @@
 
 # Dwujęzyczny serwis
 - [ ] Wersja angielska
+- [ ] Instrukcja obsługi
 
 # Centralna bibliteka druków ulotnych
 - https://cbdu.ijp.pan.pl/cgi/search/simple?q=książę
@@ -97,4 +98,11 @@
 # Kartoteka
 - https://rcin.org.pl/dlibra/publication/20029#structure
 - [ ] Jeśli nie ma to chciałbym (ja Michał) wyświetlać szufladę przed i szufladę po
+  Motywacja: Szuflady mają przerwy między sobą, niech użytkownik ma możliwość zobaczenia samemu,
+  dlaczego nie podajemy wyniku
 
+# Miłoby było
+- [x] Móc podać link do wyszukiwania
+- [ ] Pozmieniać domyślne obrazki i napisy z create-react-app
+- [ ] Przeszukiwać po wszystkim, uzupełniać wyniki wyszukiwania form i lematów o znalezione formy i lematy w innych
+  źródłach (może poprzez dodania linków wyszukiwania do tego serwisu)

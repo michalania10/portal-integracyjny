@@ -53,13 +53,13 @@ class App extends React.Component {
     }
 
     render() {
-        return (
-            <div>
+        return <div>
                 <Inputs translation={this.state.translation}
                         allSources={this.state.allSources}
                         allSearchTypes={this.state.allSearchTypes}
                         handleInputState={this.handleInputState}
                         handleSourceData={this.handleSourceData} />
+                <QueryLink translation={this.state.translation} inputState={this.state.inputState} />
                 <Conditional translation={this.state.translation} sourceData={this.state.sourceData}
                              fun={Korba} source={korba} />
                 <Conditional translation={this.state.translation} sourceData={this.state.sourceData}
@@ -69,8 +69,13 @@ class App extends React.Component {
                 <Conditional translation={this.state.translation} sourceData={this.state.sourceData}
                              fun={Kartoteka} source={kartoteka} />
         </div>
-    );
   }
+}
+
+function QueryLink(props) {
+    if (!props.inputState || !props.inputState.queryLink || props.inputState.queryLink === "")
+        return <></>
+    return <div><a href={props.inputState.queryLink}>{props.translation.get("inputs.queryLink")}</a></div>
 }
 
 function Conditional(props) {

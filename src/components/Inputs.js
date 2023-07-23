@@ -20,30 +20,63 @@ function allValidSources(allSources, searchType) {
     return validSources(allSources, searchType, allSources)
 }
 
-// function validState(allSources, allSearchTypes, inputState) {
-//     const defaultState = initInputState(allSources)
-//     if (!inputState)
-//         return defaultState;
-//     let resultState = {
-//         query: inputState.query ? inputState.query : defaultState.query,
-//         searchType: (inputState.searchType && allSearchTypes[inputState.searchType]) ? inputState.searchType : defaultState.searchType,
-//     }
-//     let resultSources = validSources(allSources, resultState.searchType, inputState.sources)
-//     resultState.sources = (Object.values(resultSources).filter(x => x).length === 0) ?
-//         allValidSources(allSources, resultState.searchType) : resultSources
-//     return resultState
-// }
+function validState(allSources, allSearchTypes, inputState) {
+    const defaultState = initInputState(allSources)
+    if (!inputState)
+        return defaultState;
+    let resultState = {
+        query: inputState.query ? inputState.query : defaultState.query,
+        searchType: allSearchTypes.includes(inputState.searchType) ? inputState.searchType : defaultState.searchType,
+    }
+    let resultSources = validSources(allSources, resultState.searchType, inputState.sources)
+    resultState.sources = (Object.values(resultSources).filter(x => x).length === 0) ?
+        allValidSources(allSources, resultState.searchType) : resultSources
+    return resultState
+}
+
+const queryParamName = "q"
+const searchTypeParamName = "t"
+const sourceParamName = "s"
+
+function url2inputState(urlSearchParams, allSources) {
+    const query = urlSearchParams.get(queryParamName)
+    const searchType = urlSearchParams.get(searchTypeParamName)
+    const sources = {}
+    urlSearchParams.getAll(sourceParamName).filter(s => allSources[s]).forEach(s => { sources[s] = true })
+    return {
+        query: query,
+        searchType: searchType,
+        sources: sources
+    }
+}
+
+function inputState2url(inputState) {
+    let sources = Object.entries(inputState.sources)
+        .filter(pair => pair[1])
+        .map(pair => sourceParamName + "=" + pair[0]).join("&")
+    return "?" +
+        queryParamName + "=" + encodeURIComponent(inputState.query) + "&" +
+        searchTypeParamName + "=" + inputState.searchType +
+        (sources === "" ? "" : ("&" + sources))
+}
 
 class Inputs extends React.Component {
     constructor(props) {
         super(props);
-        this.state = initInputState(props.allSources)
+        let url = props.url ? props.url : window.location.search
+        let urlSearchParams = new URLSearchParams(url)
+        let urlInputState = url2inputState(urlSearchParams, props.allSources)
+        this.state = validState(props.allSources, props.allSearchTypes, urlInputState)
+
         this.updateState = this.updateState.bind(this);
         this.updateSourceSelection = this.updateSourceSelection.bind(this);
         this.updateSearchType = this.updateSearchType.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputState = props.handleInputState
         this.handleSourceData = props.handleSourceData
+
+        if (this.state.query !== "")
+            this.performSearch()
     }
 
     updateState(field, value) {
@@ -65,7 +98,13 @@ class Inputs extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault()
+        this.performSearch()
+    }
+    performSearch() {
         let inputState = this.prepareResult()
+        if (!inputState.query || inputState.query === "") return
+        inputState.queryLink = inputState2url(inputState)
+
         this.handleInputState(inputState)
         this.handleSourceData({})
         for (const [key, source] of Object.entries(this.props.allSources)) {
@@ -84,14 +123,14 @@ class Inputs extends React.Component {
             <label htmlFor="inputs.query">
                 {this.props.translation.get("inputs.query")}
             </label>
-            <input name="q" id="inputs.query"
+            <input name={queryParamName} id="inputs.query"
                    onChange={event => this.updateState("query", event.target.value)}
                    value={this.state.query}/>
 
             <label htmlFor="inputs.searchType">
                 {this.props.translation.get("inputs.searchType")}
             </label>
-            <select name="t" id="inputs.searchType"
+            <select name={searchTypeParamName} id="inputs.searchType"
                     onChange={event => this.updateSearchType(event.target.value)}
                     value={this.state.searchType}>
                 {
@@ -110,7 +149,7 @@ class Inputs extends React.Component {
                     const allowed = source.canSearch(this.state.searchType);
                     const checked = !! (allowed && this.state.sources[id]);
                     return (<div key={id}>
-                        <input type="checkbox" name={id} id={id}
+                        <input type="checkbox" name={sourceParamName} id={id} value={id}
                                disabled={!allowed}
                                checked={checked}
                                onChange={event => this.updateSourceSelection(id, event.target.checked)} />
