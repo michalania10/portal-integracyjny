@@ -4,7 +4,7 @@
 import React from 'react';
 import { updatedState } from "./components/FetchInfo";
 import { Inputs, initInputState } from './components/Inputs'
-import { Translation, TranslationPl } from './components/TranslationPl';
+import { Translation, TranslationPl } from './components/Translation';
 import { Korba, korbaSource } from './components/Korba';
 import { SXVII, sXVIIsource } from './components/SVXII';
 import { CBDU, cbduSource } from "./components/CBDU";

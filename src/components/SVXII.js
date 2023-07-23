@@ -70,9 +70,10 @@ function SXVIIElemHasloHeader(props) {
 
 function SXVIIElemHasloStanOpracowania(props) {
     const state = props.elem.haslo.stan_opracowania
-    return state ?
-        <div>{props.translation.getOrKey(state, "sXVII.stan_opracowania")}</div> :
-        <></>
+    if (!state) return <></>
+    const stateDesc = props.translation.getOrKey(state, "sXVII.stan_opracowania")
+    if (stateDesc === "") return <></>
+    return <div>{stateDesc}</div>
 }
 
 function SXVIIElemHasloSub(props) {

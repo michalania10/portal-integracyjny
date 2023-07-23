@@ -5,7 +5,7 @@ function initInputState(allSources) {
     return {
         query: "",
         searchType: 'base',
-        sources: allValidSources(allSources, 'base') // { sourceKey: boolean - if it should be used }
+        sources: allValidSources(allSources, 'base'), // { sourceKey: boolean - if it should be used }
     }
 }
 
