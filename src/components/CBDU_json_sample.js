@@ -318,7 +318,7 @@ let cbduJsonSample = [
             "pl"
         ],
         "full_title": "[Tytu\u0142 nag\u0142., ant.:] Dy\u00e1riusz Seimu Electionis pod || W\u00e0rsz\u00e1w\u0105 a die 15. Maij Ann 1697. ||",
-        "title": "Dy\u00e1riusz Seimu Electionis pod W\u00e0rsz\u00e1w\u0105 a die 15. Maij Ann 1697. "
+        "title": "Te wyniki są zawsze takie same, bo nie mogę odpytać CBDU, przez brak nagłówku CORS"
     },
     {
         "number": 375,
