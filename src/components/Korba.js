@@ -33,9 +33,9 @@ function fetchKorbaData(stateLogic) {
         ...inputState,
     })
 
-    fetchAndParse(korbaGetFormsUrl(formsQuery))
+    fetchAndParse(formsUrl)
         .then(fetchState => stateLogic.setState(oldState => updatedState(oldState, "formsFetch", fetchState)))
-    fetchAndParse(korbaGetQuotesUrl(formsQuery))
+    fetchAndParse(quotesUrl)
         .then(fetchState => stateLogic.setState(oldState => updatedState(oldState, "quotesFetch", fetchState)))
 }
 

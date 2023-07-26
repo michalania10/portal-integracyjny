@@ -88,8 +88,11 @@
 # Dwujęzyczny serwis
 - [x] Wersja angielska
   - Ze strony słownika skopiowałem flagi języków (polski i angielski), zakładam, że mogę to zrobić bo należą do zakładu
-  - [ ] Trzeba sprawdzić brakujące tłumaczenia: *kartoteka*
+  - [ ] Trzeba sprawdzić tłumaczenia
+    - [x] *kartoteka*
+  - [ ] Trzeba sprawdzić polskie napisy w portalu integracyjnym
 - [ ] Instrukcja obsługi
+  - Kartoteka i CBDU nie wspierają regex, korba i słownik wspierają
 
 # Centralna bibliteka druków ulotnych
 - https://cbdu.ijp.pan.pl/cgi/search/simple?q=książę
@@ -108,3 +111,5 @@
 - [ ] Pozmieniać domyślne obrazki i napisy z create-react-app
 - [ ] Przeszukiwać po wszystkim, uzupełniać wyniki wyszukiwania form i lematów o znalezione formy i lematy w innych
   źródłach (może poprzez dodania linków wyszukiwania do tego serwisu)
+- [ ] Przypisać klasy dla divom
+- [ ] Przypisać klasy dla elementów tabel

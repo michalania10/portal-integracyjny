@@ -13,8 +13,8 @@ class FetchState {
     static ok(url, res) { return new FetchState(url, true, null, res); }
 }
 
-function fetchAndParse(url) {
-    return window.fetch(url)
+function fetchAndParse(url, options) {
+    return window.fetch(url, options)
         .then(res => res.json())
         .then(response => {
                 console.log("Fetching response", url, response)

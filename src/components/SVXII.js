@@ -30,7 +30,8 @@ function sXVIIsource() {
 function SXVII(props) {
     if (!props.baseFetch.result)
         return <FetchInfo {...props.baseFetch} translation={props.translation} />
-
+    if (props.baseFetch.result.length === 0)
+        return <div>{props.translation.get("noResults")}</div>
     return <div>
         <ul>
             {props.baseFetch.result.map(elem =>

@@ -25,7 +25,7 @@ function cbduFetchData(stateLogic) {
     })
 
     // fetchAndParse(fetchUrl, parseResult)
-    window.fetch(fetchUrl)
+    window.fetch(fetchUrl, {credentials: "omit"})
         .then(res => res.json())
         .then(response => {
                 console.log("Fetching response", fetchUrl, response)

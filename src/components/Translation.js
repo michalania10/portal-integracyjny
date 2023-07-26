@@ -40,7 +40,7 @@ const TranslationPlData = {
   "frequency": "Wystąpienia",
   "link": "Link",
   "": "",
-  "translationCodeParam": ""
+  "translation.code": "pl"
 }
 
 const TranslationEnData = {
@@ -72,7 +72,7 @@ const TranslationEnData = {
   "sXVII.znaczenia": "Meanings",
   "sXVII.znaczenia.noResults": "Entry in preparation - no definitions yet",
   "cbdu": "Digital Library of Polish and Poland-Related News Pamphlets",
-  "kartoteka": null,
+  "kartoteka": "Card index",
   "loading": "Downloading data",
   "noResults": "No results found",
   "orth": "Form",
@@ -80,7 +80,7 @@ const TranslationEnData = {
   "frequency": "Frequency",
   "link": "Link",
   "": "",
-  "translationCodeParam": translationCodeParam + "=en"
+  "translation.code": "en"
 }
 
 class Translation {
@@ -99,18 +99,21 @@ class Translation {
   }
 
   queryParam() {
-    let param = this.translation["translationCodeParam"]
-    return param ? param : ""
+    if (this.get("translation.code") === defaultTranslation.get("translation.code"))
+      return ""
+    return translationCodeParam + "=" + this.get("translation.code")
   }
 }
 
 const TranslationPl = new Translation(TranslationPlData)
 const TranslationEn = new Translation(TranslationEnData)
+const defaultTranslation = TranslationPl
 
 function initTranslation() {
   let translationCode = new URLSearchParams(window.location.search).get(translationCodeParam)
-  if (translationCode === "en") return TranslationEn
-  return TranslationPl
+  if (TranslationEn.get("translation.code") === translationCode) return TranslationEn
+  if (TranslationPl.get("translation.code") === translationCode) return TranslationPl
+  return defaultTranslation
 }
 
 function TranslationSelect(props) {

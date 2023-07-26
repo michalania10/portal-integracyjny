@@ -32,8 +32,6 @@ class KartotekaMappings {
             let lastM = this.mappings[this.mappings.length - 1]
             if (lastM.lastMatch) lastM.lastMatch = "żżżżżżżżżżżżżżżż";
         }
-
-        // console.log("KartotekaMappings", this)
     }
 
     searchBegin(searchParam, b, e) {
@@ -138,19 +136,13 @@ function createMappings(text) {
 
 function fetchMappings(url, localUrl, then) {
     console.log("Fetching kartoteka index: " + url)
-    const requestOptions = {
-        method: 'GET',
-        headers: {
-            'Accept': 'text/html',
-        }
-    };
-    fetch(url, requestOptions)
+    fetch(url)
         .then(response => response.text())
         .then(text => createMappings(text),
             error => {
                 console.log("Fetching " + url + " error:" + error)
                 console.log("Trying backup: " + localUrl)
-                fetch(localUrl, requestOptions)
+                fetch(localUrl)
                     .then(localResponse => localResponse.text())
                     .then(text => createMappings(text),
                           error => console.log("Fetching " + localUrl + " error:" + error + " no more backups"))
