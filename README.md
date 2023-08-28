@@ -113,3 +113,47 @@
   źródłach (może poprzez dodania linków wyszukiwania do tego serwisu)
 - [ ] Przypisać klasy dla divom
 - [ ] Przypisać klasy dla elementów tabel
+
+# Uwagi 2023-08-03 
+- [x] Jest: Żródła do przeszukania
+  Powinno być: Źródła do przeszukania
+- [x] Jest: Link do bierzącego wyszukiwania
+  Powinno być: Link do bieżącego wyszukiwania
+  Uwaga: czy to w ogóle potrzebne?
+  Odpowiedź: Tak: motywacja jest taka, żeby móc szybko przesłać link współpracownikowi albo mi żeby wsakać błąd w portalu
+- [x] Jest: Rodzaj wyszukiwania
+  Powinno być: Typ jednostki
+- [x] Jest: Korpus barokowy
+  Powinno być: Elektroniczny Korpus Tekstów Polskich z XVII i XVIII w. (KorBa)
+- [x] Jest: Wyniki z korpusu barokowego
+  Powinno być: Wyniki w KorBie
+  [ ] Uwaga: lepiej podłączyć link pod Wystąpienia albo wstawić ikonę linku zamiast napisu
+- [x] Jest: Przykładowe wyniki z korpusu
+  Powinno być: Przykładowe wyniki z KorBy
+  [ ] Uwaga: tutaj też lepiej wstawić ikonę linku zamiast napisu
+- [x] Jest: Słownik XVII i XVIII wieku
+  Powinno być: Elektroniczny Słownik Języka Polskiego XVII i XVIII wieku
+- [x] Jest: Odnośnik do słownika
+  Powinno być: Zobacz w słowniku
+- [x] Jest: Link do nadhasła
+  Powinno być: Link do hasła głównego
+- [x] Jest: Cyfrowa Biblioteka Druków Ulotnych
+  Powinno być: Cyfrowa Biblioteka Druków Ulotnych Polskich i Polski Dotyczących z XVI, XVII i XVIII Wieku (CBDU)
+- [x] Jest: Kartoteka
+  Powinno być: Kartoteka Słownika języka polskiego XVII i 1. połowy XVIII wieku
+- [x] Jest: Search type
+  Powinno być: Type of the searched unit
+- [x] Jest: Corpus of 17th- and 18th-century Polish Texts
+  Powinno być: Corpus of 17th- and 18th-century Polish Texts (KorBa)
+- [x] Jest: Results from corpus
+  Powinno być: Results from KorBa
+- [x] Jest: Corpus result examples
+  Powinno być: Sample results from KorBa
+- [x] Jest: Dictionary of the 17th- and 18th-century polish
+  Powinno być: Electronic Dictionary of the 17th- and 18th-century Polish
+- [x] Jest: Parent entry
+  Powinno być: Link to the parent entry
+- [x] Jest: Digital Library of Polish and Poland-Related News Pamphlets (CBDU)
+  Powinno być: Digital Library of Polish and Poland-Related News Pamphlets from the 16th to the 18th Century (CBDU)
+- [x] Jest: Card index
+  Powinno być: Card index of the Dictionary of the Polish Language of the 17th and First Half of the 18th Century
