@@ -71,8 +71,8 @@ function compareElems(a, b) {
     let cmpNadHaslo = nadHasloA.localeCompare(nadHasloB, "pl")
     if (cmpNadHaslo !== 0) return cmpNadHaslo
 
-    let formOrthA = formOrth(a.formy[0])
-    let formOrthB = formOrth(b.formy[0])
+    let formOrthA = headForm(a)
+    let formOrthB = headForm(b)
     let cmpFormOrth = formOrthA.localeCompare(formOrthB, "pl")
     if (cmpFormOrth !== 0) return cmpFormOrth
 
@@ -88,9 +88,16 @@ function formOrth(form) {
     return orth
 }
 
+function headForm(elem) {
+    let formyHaslowe = elem.formy.filter(form => form.typ === "forma hasłowa")
+    if (formyHaslowe.length > 0) return formOrth(formyHaslowe[0])
+
+    return formOrth(elem.formy[0])
+}
+
 function SXVIIElemHasloHeader(props) {
     return <div>
-        <strong>{formOrth(props.elem.formy[0])}</strong>
+        <strong>{headForm(props.elem)}</strong>
         {' '}
         <a href={sXVIIlink(props.elem.haslo.id_hasla)} target="blank">{props.translation.get("sXVII.link")}</a>
     </div>
@@ -127,10 +134,11 @@ function SXVIIElemHasloAdditional(props) {
 function SXVIIElemHasloFormy(props) {
     let orths = props.elem.formy
     if (orths.length <= 1) return <></>
+    let headF = headForm(props.elem)
     return <div>
         <strong>{props.translation.get("sXVII.haslo.formy")}</strong>:
         {' '}
-        {orths.slice(1).map(formOrth).join(", ")}
+        {orths.map(formOrth).filter(f => f !== headF).join(", ")}
     </div>
 }
 
