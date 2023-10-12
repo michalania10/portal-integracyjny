@@ -96,9 +96,10 @@
 
 # Centralna bibliteka druków ulotnych
 - https://cbdu.ijp.pan.pl/cgi/search/simple?q=książę
-- [ ] Zmiany 2023-07-20
-  - [ ] (o ile się da) przeszukiwanie tylko w polu “transkrypcja”
+- [x] Zmiany 2023-07-20
+  - [x] (o ile się da) przeszukiwanie tylko w polu “transkrypcja”
     (teraz to pole nazywa się “tłumaczenie”, nie wiem, czy się da zmienić nazwę na “transkrypcja”)
+    Nie da się - nie da się wybierać po czym się wyszukuje w CBDU
 
 # Kartoteka
 - https://rcin.org.pl/dlibra/publication/20029#structure
@@ -157,3 +158,11 @@
   Powinno być: Digital Library of Polish and Poland-Related News Pamphlets from the 16th to the 18th Century (CBDU)
 - [x] Jest: Card index
   Powinno być: Card index of the Dictionary of the Polish Language of the 17th and First Half of the 18th Century
+# Uwagi 2023-10-08
+- [x] "Najpierw idą podhasła (nieoznaczone informacją, że to podhasła), a dopiero później dwa hasła homonimiczne (to niedobrze). 
+  Trzeba coś z tym można zrobić. Moim zdaniem najłatwiej (?) byłoby zrezygnować z wyświetlania podhaseł.
+  Jak kto chce je zobaczyć, niech kliknie "zobacz w słowniku"."
+# Uwagi do wyglądu
+- [ ] 2023-08-03 "Wyniki w korbie": Uwaga: lepiej podłączyć link pod Wystąpienia albo wstawić ikonę linku zamiast napisu
+- [ ] 2023-08-03 "Przykładowe wyniki z KorBy" tutaj też lepiej wstawić ikonę linku zamiast napisu
+- [ ] 2023-07-20 Korba: liczba wystąpień: wyrównanie do prawej

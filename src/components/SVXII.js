@@ -32,9 +32,10 @@ function SXVII(props) {
         return <FetchInfo {...props.baseFetch} translation={props.translation} />
     if (props.baseFetch.result.length === 0)
         return <div>{props.translation.get("noResults")}</div>
+    let elemsToShow = orderElems(props.baseFetch.result)
     return <div>
         <ul>
-            {props.baseFetch.result.map(elem =>
+            {elemsToShow.map(elem =>
                 <li key={elem.haslo.id_hasla}>
                     <SXVIIElem elem={elem} translation={props.translation} />
                 </li>)}
@@ -52,6 +53,32 @@ function SXVIIElem(props) {
         <SXVIIElemZnaczenia {...props} />
         <SXVIIElemHasloAdditional {...props} />
     </>;
+}
+
+function orderElems(elems) {
+    let nadHasla = {}
+    elems.filter(elem => !elem.id_nadhasla)
+        .forEach(elem => nadHasla[elem.haslo.id_hasla] = true)
+
+    let toShow = elems.filter(elem => !elem.id_nadhasla || !nadHasla[elem.id_nadhasla])
+    toShow.sort(compareElems)
+    return toShow
+}
+
+function compareElems(a, b) {
+    let nadHasloA = a.id_nadhasla ? "z" : "a"
+    let nadHasloB = b.id_nadhasla ? "z" : "a"
+    let cmpNadHaslo = nadHasloA.localeCompare(nadHasloB, "pl")
+    if (cmpNadHaslo !== 0) return cmpNadHaslo
+
+    let formOrthA = formOrth(a.formy[0])
+    let formOrthB = formOrth(b.formy[0])
+    let cmpFormOrth = formOrthA.localeCompare(formOrthB, "pl")
+    if (cmpFormOrth !== 0) return cmpFormOrth
+
+    if (a.haslo.id_hasla < b.haslo.id_hasla) return -1
+    if (a.haslo.id_hasla > b.haslo.id_hasla) return 1
+    return 0
 }
 
 function formOrth(form) {
@@ -81,6 +108,7 @@ function SXVIIElemHasloSub(props) {
     const parent_id = props.elem.id_nadhasla
     return parent_id ?
         <div>
+            <div><strong>{props.translation.get("sXVII.sub")}</strong></div>
             <a href={sXVIIlink(parent_id)} target="blank">{props.translation.get("sXVII.parentLink")}</a>
         </div> :
         <></>
