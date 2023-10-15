@@ -155,6 +155,13 @@ function SXVIIEmptyZnaczenia(props) {
     return <div>{props.translation.get("sXVII.znaczenia.noResults")}</div>
 }
 
+function SXVIIElemZnaczenie(props) {
+    return <>
+        <SXVIIElemZnaczeniaDef definicja={props.znaczenie.definicja} />
+        <SXVIIElemZnaczeniaCytat cytat={props.cytaty[props.znaczenie.id_znaczenia]} />
+    </>
+}
+
 function SXVIIElemZnaczeniaDef(props) {
     return props.definicja ?
         <div>»{props.definicja}«</div> :
@@ -168,21 +175,63 @@ function SXVIIElemZnaczeniaCytat(props) {
     return <i>{noRights}</i>
 }
 
+function buildZnaczenia(elem) {
+    let withDef = elem.znaczenia.filter(znaczenie => znaczenie.definicja && znaczenie.definicja !== "")
+    withDef.sort(compareZnaczenia)
+    let list = []
+    withDef.forEach(znaczenie => {
+        if (znaczenie.lpp) {
+            let subs = list[znaczenie.lp].subs
+            subs[subs.length] = znaczenie
+        } else {
+            list[znaczenie.lp] = { main: znaczenie, subs: [] }
+        }
+    })
+    return list
+}
+
+function compareZnaczenia(a, b) {
+    if (a.lp < b.lp) return -1
+    if (a.lp > b.lp) return 1
+
+    if (!a.lpp && b.lpp) return -1
+    if (a.lpp && !b.lpp) return 1
+    if (!a.lpp && !b.lpp) return 0
+
+    if (a.lpp < b.lpp) return -1
+    return 1
+}
+
+function SXVIIZnaczeniePair(props) {
+    return <>
+        <SXVIIElemZnaczenie znaczenie={props.pair.main} cytaty={props.cytaty}/>
+        {
+            (props.pair.subs.length > 0) ? <ul>
+                {
+                    props.pair.subs.map(sub =>
+                        <li key={sub.id_znaczenia}>
+                            <SXVIIElemZnaczenie znaczenie={sub} cytaty={props.cytaty}/>
+                        </li>)
+                }
+            </ul> : <></>
+        }
+    </>
+}
+
 function SXVIIElemZnaczenia(props) {
     if (!props.elem.znaczenia)
         return <SXVIIEmptyZnaczenia {...props}/>
-    let withDef = props.elem.znaczenia.filter(znaczenie => znaczenie.definicja && znaczenie.definicja !== "")
-    if (withDef.length === 0)
+    const znaczenia = buildZnaczenia(props.elem)
+    if (znaczenia.length === 0)
         return <SXVIIEmptyZnaczenia {...props}/>
     const cytaty = buildCytatyMap(props.elem.cytaty)
     return <>
         <div><strong>{props.translation.get("sXVII.znaczenia")}</strong></div>
         <ul>
             {
-                withDef.map(znaczenie =>
-                    <li key={znaczenie.id_znaczenia}>
-                        <SXVIIElemZnaczeniaDef definicja={znaczenie.definicja} />
-                        <SXVIIElemZnaczeniaCytat cytat={cytaty[znaczenie.id_znaczenia]} />
+                znaczenia.map(pair =>
+                    <li key={pair.main.id_znaczenia}>
+                        <SXVIIZnaczeniePair pair={pair} cytaty={cytaty} />
                     </li>)
             }
         </ul>
